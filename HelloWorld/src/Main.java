@@ -1,5 +1,30 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        Scanner reader = new Scanner(System.in);  // Reading from System.in
+        System.out.println("Введите имя пользователя: ");
+        String name = reader.next();
+        reader.close();
+        System.out.println("Привет, " + name);
+
+        List<Double> sinArray = new ArrayList<>();
+        List<Integer> intArray = new ArrayList<>();
+
+        for(int i = 0; i < 46; i += 5){
+            sinArray.add(Math.sin(Math.toRadians(i)));
+            intArray.add(i);
+        }
+
+        System.out.println("| a  | sin(a)|");
+        for(int i = 0; i < sinArray.toArray().length; i++){
+            String deg = intArray.toArray()[i].toString(); // Градус в строковом виде
+            String sin = sinArray.toArray()[i].toString(); // Значение синуса градуса в строковом виде
+
+            if(i < 2) {
+                System.out.println("| " + deg + "  | " + String.format("%.3f", Double.parseDouble(sin)) + " |");
+            } else System.out.println("| " + deg + " | " + String.format("%.3f", Double.parseDouble(sin)) + " |");
+        }
     }
 }
