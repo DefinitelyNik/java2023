@@ -6,6 +6,7 @@ package education;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
@@ -32,6 +33,10 @@ public class Main {
                 System.out.println("| " + deg + "  | " + String.format("%.3f", Double.parseDouble(sin)) + " |");
             } else System.out.println("| " + deg + " | " + String.format("%.3f", Double.parseDouble(sin)) + " |");
         }
+
+        Student student = new Student("", 1, new int[] {}, new String[]{""});
+        double taskDiff = Task.taskDifficulty("Math", 2, student, "");
+        System.out.println("Оценка сложности задания составляет " + taskDiff);
     }
 
     static class Student {
@@ -103,7 +108,120 @@ public class Main {
     }
 
     static class Task {
+        private String description;
+        private String deadline; // дедлайн в днях, например (4)
+        private boolean isMandatory;
+        private String subject; // школьный предмет, по которому задано задание
+        private String subTask; // подзадание(если оно есть)
 
+        public Task(String description, String deadline, boolean isMandatory, String subject, String subTask) {
+            this.description = description;
+            this.deadline = deadline;
+            this.isMandatory = isMandatory;
+            this.subject = subject;
+            this.subTask = subTask;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public String getDeadline() {
+            return deadline;
+        }
+
+        public void setDeadline(String deadline) {
+            this.deadline = deadline;
+        }
+
+        public boolean getMandatory() {
+            return isMandatory;
+        }
+
+        public void setMandatory(boolean isMandatory) {
+            this.isMandatory = isMandatory;
+        }
+
+        public String getSubject() {
+            return subject;
+        }
+
+        public void setSubject(String subject) {
+            this.subject = subject;
+        }
+
+        public String getSubTask() {
+            return subTask;
+        }
+
+        public void setSubTask(String subTask) {
+            this.subTask = subTask;
+        }
+
+        /*
+        Метод вычисления сложности задания.
+        Учитываются предмет, дедлайн, оценки студента, доп. задание, если оно есть
+         */
+        public static double taskDifficulty(String subject, int deadline, Student student, String subTask) {
+            double diffScore; //итоговая сложность задания
+            int subjectScore = 1; //коэффицент сложности предмета
+            int deadlineScore; //коэффицент сложности дедлайна
+            int studentScore; //коэффицент сложности относительно оценок студента
+            int subTaskScore; //коэффицент сложности доп. задания
+
+            String[] hardSubjects = {"Math", "Physics", "IT", "Chemistry"};
+            String[] easySubjects = {"Russian", "English", "History", "Biology"};
+
+            if(subject.length() > 0) {
+                for (int i = 0; i < hardSubjects.length; i++) {
+                    if (Objects.equals(subject, hardSubjects[i])) { //если предмет сложный, коэффицент сложности высокий
+                        subjectScore = 5;
+                        break;
+                    } else if (Objects.equals(subject, easySubjects[i])) { //если предмет относительно простой, коэффицент сложности низкий
+                        subjectScore = 2;
+                        break;
+                    } else subjectScore = 1; // если предмет совсем простой, коэффицент сложности очень низкий
+                }
+            } else subjectScore = 1;
+
+            //Оценивается, сколько времени даётся на выполнение задания
+            if(deadline > 7) {
+                deadlineScore = 1;
+            } else if(deadline > 3) {
+                deadlineScore = 2;
+            } else if(deadline > 0) {
+                deadlineScore = 4;
+            } else deadlineScore = 6;
+
+            /*
+            Оцениваются знания и навыки студента
+            Чем лучше оценки, тем легче будет выполнить задание
+            Чем хуже оценки, тем труднее его выполнить
+             */
+            if(student.marks.length > 0){
+                int sum = 0;
+                for (int mark : student.marks) {
+                    sum += mark;
+                }
+                double avg = sum/student.marks.length;
+
+                if(avg > 4) studentScore = 2;
+                else if(avg > 3) studentScore = 3;
+                else studentScore = 4;
+            } else studentScore = 3;
+
+            //Оценивается доп. задание. Если оно есть, задание сложнее, чем если доп. задания нет
+            if(subTask.length() > 0) subTaskScore = 3;
+            else subTaskScore = 1;
+
+            diffScore = (subjectScore * deadlineScore * studentScore * subTaskScore) / 10.0;
+
+            return diffScore;
+        }
     }
 
     static class Mark {
