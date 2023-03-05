@@ -34,8 +34,8 @@ public class Main {
             } else System.out.println("| " + deg + " | " + String.format("%.3f", Double.parseDouble(sin)) + " |");
         }
 
-        Student student = new Student("", 1, new int[] {}, new String[]{""});
-        double taskDiff = Task.taskDifficulty("Math", 2, student, "");
+        Student student = new Student("Непочатый Никита Владимирович", 21, new int[] {5, 5, 5}, new String[]{""});
+        double taskDiff = Task.taskDifficulty("IT", -15, student, "выиграть игру в Dota 2");
         System.out.println("Оценка сложности задания составляет " + taskDiff);
     }
 
@@ -184,9 +184,10 @@ public class Main {
                     } else if (Objects.equals(subject, easySubjects[i])) { //если предмет относительно простой, коэффицент сложности низкий
                         subjectScore = 2;
                         break;
-                    } else subjectScore = 1; // если предмет совсем простой, коэффицент сложности очень низкий
+                    }  // если предмет совсем простой, коэффицент сложности очень низкий
+
                 }
-            } else subjectScore = 1;
+            }
 
             //Оценивается, сколько времени даётся на выполнение задания
             if(deadline > 7) {
@@ -218,7 +219,7 @@ public class Main {
             if(subTask.length() > 0) subTaskScore = 3;
             else subTaskScore = 1;
 
-            diffScore = (subjectScore * deadlineScore * studentScore * subTaskScore) / 10.0;
+            diffScore = (subjectScore * deadlineScore * studentScore * subTaskScore) / 10.0; // формула вычисления итоговой оценки сложности задания
 
             return diffScore;
         }

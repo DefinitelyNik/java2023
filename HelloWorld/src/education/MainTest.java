@@ -6,6 +6,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MainTest {
 
+    Main.Student student = new Main.Student(
+            "Непочатый Никита Владимирович",
+            21,
+            new int[] {5, 5, 5},
+            new String[]{""});
+
     @Test
     void mainTest() {
     }
@@ -35,6 +41,60 @@ class MainTest {
     void getEmptyMoodTest() {
         String expected = "Student is fine(no marks found)";
         String actual = Main.Student.getMood(new int[] {});
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void emptySubjectTaskTest() {
+        double expected = 2.4;
+        double actual = Main.Task.taskDifficulty("", 2, student, "выиграть игру в CS:GO");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void nonExistingSubjectTaskTest() {
+        double expected = 2.4;
+        double actual = Main.Task.taskDifficulty("wtf", 2, student, "выиграть игру в Dota 2");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void positiveDeadlineTaskTest() {
+        double expected = 3.0;
+        double actual = Main.Task.taskDifficulty("IT", 8, student, "выиграть игру в LoL");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void zeroDeadlineTaskTest() {
+        double expected = 18.0;
+        double actual = Main.Task.taskDifficulty("IT", 0, student, "выиграть игру в PUBG");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void negativeDeadlineTaskTest() {
+        double expected = 18.0;
+        double actual = Main.Task.taskDifficulty("IT", -15, student, "выиграть игру в Valorant");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void emptyMarksTaskTest() {
+        Main.Student student = new Main.Student(
+                "Непочатый Никита Владимирович",
+                21,
+                new int[] {},
+                new String[]{""});
+        double expected = 9.0;
+        double actual = Main.Task.taskDifficulty("IT", 7, student, "выиграть игру в Brawl Stars");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void emptySubtaskTaskTest() {
+        double expected = 6.0;
+        double actual = Main.Task.taskDifficulty("IT", -15, student, "");
         assertEquals(expected, actual);
     }
 
