@@ -99,6 +99,32 @@ class MainTest {
     }
 
     @Test
+    void DeservedMarkTest() {
+        String expected = "Deserved :)";
+        String actual = Main.Mark.isDeserved(5, student);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void unDeservedMarkTest() {
+        String expected = "Undeserved :(";
+        String actual = Main.Mark.isDeserved(2, student);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void maybeDeservedMarkTest() {
+        Main.Student student = new Main.Student(
+                "Непочатый Никита Владимирович",
+                21,
+                new int[] {},
+                new String[]{""});
+        String expected = "We cannot tell whether the mark is deserved or not";
+        String actual = Main.Mark.isDeserved(2, student);
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void zeroFactTest() {
         long expected = 1;
         long actual = Main.Mathematics.fact(0);

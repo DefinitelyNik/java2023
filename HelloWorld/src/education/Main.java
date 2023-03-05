@@ -34,9 +34,10 @@ public class Main {
             } else System.out.println("| " + deg + " | " + String.format("%.3f", Double.parseDouble(sin)) + " |");
         }
 
-        Student student = new Student("Непочатый Никита Владимирович", 21, new int[] {5, 5, 5}, new String[]{""});
+        Student student = new Student("Непочатый Никита Владимирович", 21, new int[] {}, new String[]{""});
         double taskDiff = Task.taskDifficulty("IT", -15, student, "выиграть игру в Dota 2");
         System.out.println("Оценка сложности задания составляет " + taskDiff);
+        System.out.println(Mark.isDeserved(5,student));
     }
 
     static class Student {
@@ -226,7 +227,57 @@ public class Main {
     }
 
     static class Mark {
+        private int value;
+        private String subject;
+        private String studentName;
 
+        public Mark(int value, String subject, String studentName) {
+            this.value = value;
+            this.subject = subject;
+            this.studentName = studentName;
+        }
+
+        public int getValue() {
+            return value;
+        }
+
+        public void setValue(int value) {
+            this.value = value;
+        }
+
+        public String getSubject() {
+            return subject;
+        }
+
+        public void setSubject(String subject) {
+            this.subject = subject;
+        }
+
+        public String getStudentName() {
+            return studentName;
+        }
+
+        public void setStudentName(String studentName) {
+            this.studentName = studentName;
+        }
+
+        /*
+        Метод isDeserved определяет, заслуженна оценка или нет
+        Если оценка совпадает со средним арифметическим оценок студента, то она заслужена
+        В противном случае она не заслужена
+        Если оценок нет, определить степень заслуженности невозможно
+         */
+        public static String isDeserved(int value, Student student) {
+            if(student.marks.length == 0) return "We cannot tell whether the mark is deserved or not";
+            int sum = 0;
+            for (int mark : student.marks) {
+                sum += mark;
+            }
+            double avg = sum/student.marks.length;
+
+            if(value == (int)avg) return "Deserved :)";
+            return "Undeserved :(";
+        }
     }
     static class Mathematics {
         /*
