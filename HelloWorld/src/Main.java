@@ -27,5 +27,18 @@ public class Main {
             } else System.out.println("| " + deg + " | " + String.format("%.3f", Double.parseDouble(sin)) + " |");
         }
     }
+    static class Mathematics {
+        public static long fact(int n) {
+            if (n < 0) return -1;
+            else if (n < 2) return 1;
+            return n * fact(n-1);
+        }
+
+        public static int sign(double n) {
+            if(n > 0) return 1;
+            else if (n < 0) return -1;
+            return 0;
+        }
+    }
 }
 
