@@ -1,3 +1,5 @@
+package education;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -6,6 +8,34 @@ class MainTest {
 
     @Test
     void mainTest() {
+    }
+
+    @Test
+    void getHappyMoodTest() {
+        String expected = "Student is happy";
+        String actual = Main.Student.getMood(new int[] {5, 5, 4, 5, 3});
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void getOkMoodTest() {
+        String expected = "Student is ok";
+        String actual = Main.Student.getMood(new int[] {3, 3, 3, 3});
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void getSadMoodTest() {
+        String expected = "Student is sad";
+        String actual = Main.Student.getMood(new int[] {2, 2, 2, 2});
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void getEmptyMoodTest() {
+        String expected = "Student is fine(no marks found)";
+        String actual = Main.Student.getMood(new int[] {});
+        assertEquals(expected, actual);
     }
 
     @Test
