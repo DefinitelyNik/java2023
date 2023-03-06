@@ -51,7 +51,7 @@ public class Mark {
         for (int mark : student.getMarks()) {
             sum += mark;
         }
-        double avg = sum/ student.getMarks().length;
+        double avg = (double)sum/ student.getMarks().length;
 
         if(value == (int)avg) return "Deserved :)";
         return "Undeserved :(";

@@ -13,10 +13,6 @@ class MainTest {
             new String[]{""});
 
     @Test
-    void mainTest() {
-    }
-
-    @Test
     void getHappyMoodTest() {
         String expected = "Student is happy";
         String actual = Student.getMood(new int[] {5, 5, 4, 5, 3});
@@ -81,13 +77,13 @@ class MainTest {
 
     @Test
     void emptyMarksTaskTest() {
-        Student student = new Student(
-                "Непочатый Никита Владимирович",
+        Student anotherStudent = new Student(
+                "Акакиев Акакий Акакиевич",
                 21,
                 new int[] {},
                 new String[]{""});
         double expected = 9.0;
-        double actual = Task.taskDifficulty("IT", 7, student, "выиграть игру в Brawl Stars");
+        double actual = Task.taskDifficulty("IT", 7, anotherStudent, "выиграть игру в Brawl Stars");
         assertEquals(expected, actual);
     }
 
@@ -99,7 +95,7 @@ class MainTest {
     }
 
     @Test
-    void DeservedMarkTest() {
+    void deservedMarkTest() {
         String expected = "Deserved :)";
         String actual = Mark.isDeserved(5, student);
         assertEquals(expected, actual);
@@ -114,13 +110,13 @@ class MainTest {
 
     @Test
     void maybeDeservedMarkTest() {
-        Student student = new Student(
+        Student otherStudent = new Student(
                 "Непочатый Никита Владимирович",
                 21,
                 new int[] {},
                 new String[]{""});
         String expected = "We cannot tell whether the mark is deserved or not";
-        String actual = Mark.isDeserved(2, student);
+        String actual = Mark.isDeserved(2, otherStudent);
         assertEquals(expected, actual);
     }
 

@@ -75,17 +75,13 @@ public class Task {
         int subTaskScore; //коэффицент сложности доп. задания
 
         String[] hardSubjects = {"Math", "Physics", "IT", "Chemistry"};
-        String[] easySubjects = {"Russian", "English", "History", "Biology"};
 
-        if(subject.length() > 0) {
-            for (int i = 0; i < hardSubjects.length; i++) {
-                if (Objects.equals(subject, hardSubjects[i])) { //если предмет сложный, коэффицент сложности высокий
-                    subjectScore = 5;
-                    break;
-                } else if (Objects.equals(subject, easySubjects[i])) { //если предмет относительно простой, коэффицент сложности низкий
-                    subjectScore = 2;
-                    break;
-                }  // если предмет совсем простой, коэффицент сложности очень низкий
+        for (String hardSubject : hardSubjects) {
+            if (Objects.equals(subject, hardSubject)) { //если предмет сложный, коэффицент сложности высокий
+                subjectScore = 5;
+                break;
+            } else { //если предмет относительно простой, коэффицент сложности низкий
+                subjectScore = 2;
             }
         }
 
@@ -111,7 +107,7 @@ public class Task {
             for (int mark : student.getMarks()) {
                 sum += mark;
             }
-            double avg = sum/ student.getMarks().length;
+            double avg = (double)sum/ student.getMarks().length;
 
             if(avg > 4) studentScore = 2;
             else if(avg > 3) studentScore = 3;
