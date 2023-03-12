@@ -6,13 +6,13 @@ package education;
  */
 public class Mark {
     private int value; //Значение оценки
-    private String subject; //Предмет, по которому ставится оценка
-    private String studentName; //Полное имя студента, которому ставится оценка
+    private String teacherName; //Полное имя учителя, поставившего оценку
+    private Student student;
 
-    public Mark(int value, String subject, String studentName) {
+    public Mark(int value, String subject, Student thisStudent) {
         this.value = value;
-        this.subject = subject;
-        this.studentName = studentName;
+        this.teacherName = subject;
+        this.student = thisStudent;
     }
 
     public int getValue() {
@@ -23,20 +23,20 @@ public class Mark {
         this.value = value;
     }
 
-    public String getSubject() {
-        return subject;
+    public String getTeacherName() {
+        return teacherName;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
     }
 
-    public String getStudentName() {
-        return studentName;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     /**
