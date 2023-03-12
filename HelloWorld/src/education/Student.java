@@ -10,11 +10,11 @@ public class Student {
     private int[] marks; /**Текущие оценки студента*/
     private String[] lessons; /**Уроки студента*/
 
-    public Student (String fullName, int age, int[] marks, String[] lessons) {
-        this.fullName = fullName;
-        this.age = age;
-        this.marks = marks;
-        this.lessons = lessons;
+    private Student (StudentBuilder studentBuilder) {
+        fullName = studentBuilder.fullName;
+        age = studentBuilder.age;
+        marks = studentBuilder.marks;
+        lessons = studentBuilder.lessons;
     }
 
     public String getFullName() {
@@ -47,6 +47,24 @@ public class Student {
 
     public void setLessons(String[] lessons) {
         this.lessons = lessons;
+    }
+
+    public static class StudentBuilder {
+        private String fullName; /**ФИО студента*/
+        private int age; /**Возраст студента*/
+        private int[] marks; /**Текущие оценки студента*/
+        private String[] lessons; /**Уроки студента*/
+
+        public StudentBuilder (String fullName, int age, int[] marks, String[] lessons) {
+            this.fullName = fullName;
+            this.age = age;
+            this.marks = marks;
+            this.lessons = lessons;
+        }
+
+        public Student build() {
+            return new Student(this);
+        }
     }
 
     /**

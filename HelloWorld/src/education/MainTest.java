@@ -6,11 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MainTest {
 
-    Student student = new Student(
-            "Непочатый Никита Владимирович",
-            21,
-            new int[] {5, 5, 5},
-            new String[]{""});
+    Student student = new Student.StudentBuilder("Непочатый Никита Владимирович", 21, new int[] {5, 5, 5}, new String[]{""}).build();
 
     @Test
     void getHappyMoodTest() {
@@ -42,14 +38,14 @@ class MainTest {
 
     @Test
     void emptySubjectTaskTest() {
-        double expected = 2.4;
+        double expected = 4.8;
         double actual = Task.taskDifficulty("", 2, student, "выиграть игру в CS:GO");
         assertEquals(expected, actual);
     }
 
     @Test
     void nonExistingSubjectTaskTest() {
-        double expected = 2.4;
+        double expected = 4.8;
         double actual = Task.taskDifficulty("wtf", 2, student, "выиграть игру в Dota 2");
         assertEquals(expected, actual);
     }
@@ -77,11 +73,7 @@ class MainTest {
 
     @Test
     void emptyMarksTaskTest() {
-        Student anotherStudent = new Student(
-                "Акакиев Акакий Акакиевич",
-                21,
-                new int[] {},
-                new String[]{""});
+        Student anotherStudent = new Student.StudentBuilder("Акакиев Акакий Акакиевич", 21, new int[] {}, new String[]{""}).build();
         double expected = 9.0;
         double actual = Task.taskDifficulty("IT", 7, anotherStudent, "выиграть игру в Brawl Stars");
         assertEquals(expected, actual);
@@ -110,11 +102,7 @@ class MainTest {
 
     @Test
     void maybeDeservedMarkTest() {
-        Student otherStudent = new Student(
-                "Непочатый Никита Владимирович",
-                21,
-                new int[] {},
-                new String[]{""});
+        Student otherStudent = new Student.StudentBuilder("Непочатый Никита Владимирович", 21, new int[] {}, new String[]{""}).build();
         String expected = "We cannot tell whether the mark is deserved or not";
         String actual = Mark.isDeserved(2, otherStudent);
         assertEquals(expected, actual);

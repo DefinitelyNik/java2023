@@ -13,12 +13,12 @@ public class Task {
     private String subject; /**школьный предмет, по которому задано задание*/
     private String subTask; /**подзадание(если оно есть)*/
 
-    public Task(String description, String deadline, boolean isMandatory, String subject, String subTask) {
-        this.description = description;
-        this.deadline = deadline;
-        this.isMandatory = isMandatory;
-        this.subject = subject;
-        this.subTask = subTask;
+    private Task(TaskBuilder taskBuilder) {
+        description = taskBuilder.description;
+        deadline = taskBuilder.deadline;
+        isMandatory = taskBuilder.isMandatory;
+        subject = taskBuilder.subject;
+        subTask = taskBuilder.subTask;
     }
 
     public String getDescription() {
@@ -61,11 +61,35 @@ public class Task {
         this.subTask = subTask;
     }
 
-     /**
-      * Метод вычисления сложности задания.
-      * Учитываются такие параметры, как: предмет, дедлайн, оценки студента, доп. задание (если оно есть)
-      * Считаются коэффиценты сложности по каждому параметру, которые затем используются в итоговой формуле
-      * Итоговая формула представляет собой перемножение коэффицентов сложности и деление их на 10
+    public static class TaskBuilder {
+        private String description; /**описание задания */
+        private String deadline; /**дедлайн в днях, например (4)*/
+        private boolean isMandatory; /** обязательное задание или нет*/
+        private String subject; /**школьный предмет, по которому задано задание*/
+        private String subTask; /**подзадание(если оно есть)*/
+
+        public TaskBuilder (String description, String deadline, boolean isMandatory, String subject) {
+            this.description = description;
+            this.deadline = deadline;
+            this.isMandatory = isMandatory;
+            this.subject = subject;
+        }
+
+        public TaskBuilder setSubTask(String subTask) {
+            this.subTask = subTask;
+            return this;
+        }
+
+        public Task build() {
+            return new Task(this);
+        }
+    }
+
+    /**
+     * Метод вычисления сложности задания.
+     * Учитываются такие параметры, как: предмет, дедлайн, оценки студента, доп. задание (если оно есть)
+     * Считаются коэффиценты сложности по каждому параметру, которые затем используются в итоговой формуле
+     * Итоговая формула представляет собой перемножение коэффицентов сложности и деление их на 10
      */
     public static double taskDifficulty(String subject, int deadline, Student student, String subTask) {
         double diffScore; //итоговая сложность задания

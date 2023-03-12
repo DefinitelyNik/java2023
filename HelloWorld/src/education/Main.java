@@ -33,7 +33,7 @@ public class Main {
             } else System.out.println("| " + deg + " | " + String.format("%.3f", Double.parseDouble(sin)) + " |");
         }
 
-        Student student = new Student("Непочатый Никита Владимирович", 21, new int[] {}, new String[]{""});
+        Student student = new Student.StudentBuilder("Непочатый Никита Владимирович", 21, new int[] {}, new String[]{""}).build();
         double taskDiff = Task.taskDifficulty("IT", -15, student, "выиграть игру в Dota 2");
         System.out.println("Оценка сложности задания составляет " + taskDiff);
         System.out.println(Mark.isDeserved(5,student));
