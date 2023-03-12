@@ -58,16 +58,20 @@ public class Student {
     public static String getMood(int[] marks) {
         if (marks.length == 0) return "Student is fine(no marks found)";
 
+        double avg = avgMarks(marks);
+
+        if (avg >= 4) return "Student is happy";
+        else if(avg >= 3) return "Student is ok";
+        return "Student is sad";
+    }
+
+    public static double avgMarks(int[] marks) {
         double sum = 0;
 
         for (int mark : marks) {
             sum += mark;
         }
 
-        double avg = sum/marks.length;
-
-        if (avg >= 4) return "Student is happy";
-        else if(avg >= 3) return "Student is ok";
-        return "Student is sad";
+        return sum / marks.length;
     }
 }

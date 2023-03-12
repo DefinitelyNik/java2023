@@ -70,7 +70,7 @@ public class Task {
     public static double taskDifficulty(String subject, int deadline, Student student, String subTask) {
         double diffScore; //итоговая сложность задания
         int subjectScore = 1; //коэффицент сложности предмета
-        int deadlineScore; //коэффицент сложности дедлайна
+        int deadlineScore = 6; //коэффицент сложности дедлайна
         int studentScore; //коэффицент сложности относительно оценок студента
         int subTaskScore; //коэффицент сложности доп. задания
 
@@ -95,7 +95,7 @@ public class Task {
             deadlineScore = 2;
         } else if(deadline > 0) {
             deadlineScore = 4;
-        } else deadlineScore = 6;
+        }
 
         /*
         Оцениваются знания и навыки студента
@@ -103,11 +103,7 @@ public class Task {
         Чем хуже оценки, тем труднее его выполнить
          */
         if(student.getMarks().length > 0){
-            int sum = 0;
-            for (int mark : student.getMarks()) {
-                sum += mark;
-            }
-            double avg = (double)sum/ student.getMarks().length;
+            double avg = Student.avgMarks(student.getMarks());
 
             if(avg > 4) studentScore = 2;
             else if(avg > 3) studentScore = 3;

@@ -47,11 +47,8 @@ public class Mark {
      */
     public static String isDeserved(int value, Student student) {
         if(student.getMarks().length == 0) return "We cannot tell whether the mark is deserved or not";
-        int sum = 0;
-        for (int mark : student.getMarks()) {
-            sum += mark;
-        }
-        double avg = (double)sum/ student.getMarks().length;
+  
+        double avg = Student.avgMarks(student.getMarks());
 
         if(value == (int)avg) return "Deserved :)";
         return "Undeserved :(";
