@@ -5,10 +5,10 @@ package education;
  * Также имеет метод, определяющий настроение студента по его текущим оценкам
  */
 public class Student {
-    private String fullName; //ФИО студента
-    private int age; //Возраст студента
-    private int[] marks; //Текущие оценки студента
-    private String[] lessons; //Уроки студента
+    private String fullName; /**ФИО студента*/
+    private int age; /**Возраст студента*/
+    private int[] marks; /**Текущие оценки студента*/
+    private String[] lessons; /**Уроки студента*/
 
     public Student (String fullName, int age, int[] marks, String[] lessons) {
         this.fullName = fullName;

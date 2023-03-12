@@ -5,9 +5,9 @@ package education;
  * Также имеет метод, определяющий, заслужена ли поставленная оценка
  */
 public class Mark {
-    private int value; //Значение оценки
-    private String teacherName; //Полное имя учителя, поставившего оценку
-    private Student student;
+    private int value; /**Значение оценки */
+    private String teacherName; /**Полное имя учителя, поставившего оценку */
+    private Student student; /** Класс студент */
 
     public Mark(int value, String subject, Student thisStudent) {
         this.value = value;
@@ -47,7 +47,7 @@ public class Mark {
      */
     public static String isDeserved(int value, Student student) {
         if(student.getMarks().length == 0) return "We cannot tell whether the mark is deserved or not";
-  
+
         double avg = Student.avgMarks(student.getMarks());
 
         if(value == (int)avg) return "Deserved :)";

@@ -7,11 +7,11 @@ import java.util.Objects;
  * Также имеет метод, вычисляющий сложность заданного задания по некоторым параметрам
  */
 public class Task {
-    private String description;
-    private String deadline; // дедлайн в днях, например (4)
-    private boolean isMandatory;
-    private String subject; // школьный предмет, по которому задано задание
-    private String subTask; // подзадание(если оно есть)
+    private String description; /**описание задания */
+    private String deadline; /**дедлайн в днях, например (4)*/
+    private boolean isMandatory; /** обязательное задание или нет*/
+    private String subject; /**школьный предмет, по которому задано задание*/
+    private String subTask; /**подзадание(если оно есть)*/
 
     public Task(String description, String deadline, boolean isMandatory, String subject, String subTask) {
         this.description = description;
