@@ -2,16 +2,20 @@ package education;
 
 import java.util.Objects;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * Класс "Задание" имеет 5 полей: описание задания, дедлайн, обязательность выполнения, предмет и доп. задание
  * Также имеет метод, вычисляющий сложность заданного задания по некоторым параметрам
  */
 public class Task {
-    private String description; /**описание задания */
-    private String deadline; /**дедлайн в днях, например (4)*/
-    private boolean isMandatory; /** обязательное задание или нет*/
-    private String subject; /**школьный предмет, по которому задано задание*/
-    private String subTask; /**подзадание(если оно есть)*/
+    @Getter @Setter private String description; /**описание задания */
+    @Getter @Setter private String deadline; /**дедлайн в днях, например (4)*/
+    @Getter @Setter private boolean isMandatory; /** обязательное задание или нет*/
+    @Getter @Setter private String subject; /**школьный предмет, по которому задано задание*/
+    @Getter @Setter private String subTask; /**подзадание(если оно есть)*/
 
     private Task(TaskBuilder taskBuilder) {
         description = taskBuilder.description;
@@ -20,65 +24,13 @@ public class Task {
         subject = taskBuilder.subject;
         subTask = taskBuilder.subTask;
     }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getDeadline() {
-        return deadline;
-    }
-
-    public void setDeadline(String deadline) {
-        this.deadline = deadline;
-    }
-
-    public boolean getMandatory() {
-        return isMandatory;
-    }
-
-    public void setMandatory(boolean isMandatory) {
-        this.isMandatory = isMandatory;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public String getSubTask() {
-        return subTask;
-    }
-
-    public void setSubTask(String subTask) {
-        this.subTask = subTask;
-    }
-
+    @Builder
     public static class TaskBuilder {
         private String description; /**описание задания */
         private String deadline; /**дедлайн в днях, например (4)*/
         private boolean isMandatory; /** обязательное задание или нет*/
         private String subject; /**школьный предмет, по которому задано задание*/
         private String subTask; /**подзадание(если оно есть)*/
-
-        public TaskBuilder (String description, String deadline, boolean isMandatory, String subject) {
-            this.description = description;
-            this.deadline = deadline;
-            this.isMandatory = isMandatory;
-            this.subject = subject;
-        }
-
-        public TaskBuilder setSubTask(String subTask) {
-            this.subTask = subTask;
-            return this;
-        }
 
         public Task build() {
             return new Task(this);
