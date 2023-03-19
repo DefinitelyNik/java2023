@@ -2,7 +2,6 @@ package education;
 
 import java.util.Objects;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,7 +23,7 @@ public class Task {
         subject = taskBuilder.subject;
         subTask = taskBuilder.subTask;
     }
-    @Builder
+
     public static class TaskBuilder {
         private String description; /**описание задания */
         private String deadline; /**дедлайн в днях, например (4)*/

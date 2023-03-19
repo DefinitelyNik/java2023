@@ -1,14 +1,19 @@
 package education;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * Класс "Студент" имеет 4 поля: полное имя(ФИО), возраст, оценки, уроки
  * Также имеет метод, определяющий настроение студента по его текущим оценкам
  */
+
 public class Student {
-    private String fullName; /**ФИО студента*/
-    private int age; /**Возраст студента*/
-    private int[] marks; /**Текущие оценки студента*/
-    private String[] lessons; /**Уроки студента*/
+    @Getter @Setter private String fullName; /**ФИО студента*/
+    @Getter @Setter private int age; /**Возраст студента*/
+    @Getter @Setter private int[] marks; /**Текущие оценки студента*/
+    @Getter @Setter private String[] lessons; /**Уроки студента*/
 
     private Student (StudentBuilder studentBuilder) {
         fullName = studentBuilder.fullName;
@@ -17,50 +22,12 @@ public class Student {
         lessons = studentBuilder.lessons;
     }
 
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public int[] getMarks() {
-        return marks;
-    }
-
-    public void setMarks(int[] marks) {
-        this.marks = marks;
-    }
-
-    public String[] getLessons() {
-        return lessons;
-    }
-
-    public void setLessons(String[] lessons) {
-        this.lessons = lessons;
-    }
-
+    @Builder
     public static class StudentBuilder {
         private String fullName; /**ФИО студента*/
         private int age; /**Возраст студента*/
         private int[] marks; /**Текущие оценки студента*/
         private String[] lessons; /**Уроки студента*/
-
-        public StudentBuilder (String fullName, int age, int[] marks, String[] lessons) {
-            this.fullName = fullName;
-            this.age = age;
-            this.marks = marks;
-            this.lessons = lessons;
-        }
 
         public Student build() {
             return new Student(this);

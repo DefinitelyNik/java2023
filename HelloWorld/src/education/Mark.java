@@ -1,43 +1,18 @@
 package education;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * Класс "Оценка" имеет 3 поля: значение оценки, предмет, имя студента
  * Также имеет метод, определяющий, заслужена ли поставленная оценка
  */
+@AllArgsConstructor
 public class Mark {
-    private int value; /**Значение оценки */
-    private String teacherName; /**Полное имя учителя, поставившего оценку */
-    private Student student; /** Класс студент */
-
-    public Mark(int value, String subject, Student thisStudent) {
-        this.value = value;
-        this.teacherName = subject;
-        this.student = thisStudent;
-    }
-
-    public int getValue() {
-        return value;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
-
-    public String getTeacherName() {
-        return teacherName;
-    }
-
-    public void setTeacherName(String teacherName) {
-        this.teacherName = teacherName;
-    }
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
+    @Getter @Setter private int value; /**Значение оценки */
+    @Getter @Setter private String teacherName; /**Полное имя учителя, поставившего оценку */
+    @Getter @Setter private Student student; /**Класс студент */
 
     /**
      * Метод isDeserved определяет, заслуженна оценка или нет
