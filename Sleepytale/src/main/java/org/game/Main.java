@@ -1,4 +1,4 @@
-package org.example;
+package org.game;
 
 import javax.swing.JFrame;
 

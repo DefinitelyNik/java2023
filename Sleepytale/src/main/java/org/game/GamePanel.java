@@ -1,4 +1,4 @@
-package org.example;
+package org.game;
 
 import entity.Player;
 import tile.TileManager;
@@ -12,13 +12,12 @@ public class GamePanel extends JPanel implements Runnable{
     final int originalTileSize = 64; // 64х64 - оригинальный размер плитки
     final int scale = 1;
     public final int tileSize = originalTileSize * scale; // 64х64 - итоговый размер плитки
-    public final int maxScreenCol = 16;
-    public final int maxScreenRow = 12;
-    public final int screenWidth = tileSize * maxScreenCol; // 1024 пикселей
-    public final int screenHeight = tileSize * maxScreenRow; // 768 пикселей
+    public final int maxScreenCol = 16; // максимальное количество плиток по горизонтали(колонок)
+    public final int maxScreenRow = 12; // максимальное количество плиток по вертикали(строк)
+    public final int screenWidth = tileSize * maxScreenCol; // ширина окна(1024 пикселей)
+    public final int screenHeight = tileSize * maxScreenRow; // высота окна(768 пикселей)
 
-    //FPS
-    int FPS = 60;
+    int FPS = 60; // значение FPS в игре
 
     TileManager tileM = new TileManager(this);
     KeyHandler keyH = new KeyHandler();
@@ -48,7 +47,7 @@ public class GamePanel extends JPanel implements Runnable{
         long timer = 0;
         int drawCount = 0;
 
-
+        //Game loop
         while(gameThread != null) {
 
             currentTime = System.nanoTime();
@@ -63,9 +62,8 @@ public class GamePanel extends JPanel implements Runnable{
                 drawCount++;
             }
 
-            /**
-             * Checking the actual FPS
-             */
+
+            //Checking the actual FPS
             if(timer >= 1000000000) {
                 System.out.println("FPS:" + drawCount);
                 drawCount = 0;
@@ -73,6 +71,8 @@ public class GamePanel extends JPanel implements Runnable{
             }
         }
     }
+
+
     public void update(){
         player.update();
     }
