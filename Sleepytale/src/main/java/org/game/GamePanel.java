@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable{
 
-    //настройки
+    //Настройки экрана
     final int originalTileSize = 64; // 64х64 - оригинальный размер плитки
     final int scale = 1;
     public final int tileSize = originalTileSize * scale; // 64х64 - итоговый размер плитки
@@ -17,12 +17,18 @@ public class GamePanel extends JPanel implements Runnable{
     public final int screenWidth = tileSize * maxScreenCol; // ширина окна(1024 пикселей)
     public final int screenHeight = tileSize * maxScreenRow; // высота окна(768 пикселей)
 
+    // Настройки мира
+    public final int maxWorldCol = 50;
+    public final int maxWorldRow = 50;
+    public final int worldWidth = tileSize * maxWorldCol;
+    public final int worldHeight = tileSize * maxWorldRow;
+
     int FPS = 60; // значение FPS в игре
 
     TileManager tileM = new TileManager(this);
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
-    Player player = new Player(this, keyH);
+    public Player player = new Player(this, keyH);
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
