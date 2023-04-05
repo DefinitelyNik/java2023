@@ -5,7 +5,8 @@ import java.io.IOException;
 import java.util.Objects;
 
 /**
- * Door object
+ * Класс дверь
+ * Нужен для создания объектов этого класса
  */
 public class OBJ_Door extends SuperObject{
     public OBJ_Door() {

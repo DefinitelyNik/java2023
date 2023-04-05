@@ -2,6 +2,9 @@ package org.game;
 
 import entity.Entity;
 
+/**
+ * Этот класс проверяет коллизии
+ */
 public class CollisionChecker {
 
     GamePanel gp;
@@ -10,6 +13,9 @@ public class CollisionChecker {
         this.gp = gp;
     }
 
+    /**
+     * Класс получает класс сущности и проверяет её коллизию с плитками вокруг
+     */
     public void CheckTile(Entity entity) {
 
         int entityLeftWorldX = entity.worldX + entity.solidArea.x; // координата левого края области коллизии
@@ -24,6 +30,10 @@ public class CollisionChecker {
 
         int tileNum1, tileNum2; // две координаты стороны области коллизии
 
+
+        /**
+         * Тут проверяется коллизия в зависимости от направления движения сущности
+         */
         switch (entity.direction) {
             case "up" -> {
                 entityTopRow = (entityTopWorldY - entity.speed) / gp.tileSize;

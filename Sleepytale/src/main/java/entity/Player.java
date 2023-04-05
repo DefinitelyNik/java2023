@@ -9,12 +9,20 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * Класс игрока
+ * Является сущностью, поэтому наследует этот класс
+ * Тут устанавливается положение игрока на карте, его скорость, коллизия и др.
+ * Устанавливаются анимации его передвижений
+ * Обрабатываются его передвижения по карте
+ * Отрисовывается сам игрок и его анимации
+ */
 public class Player extends Entity{
     GamePanel gp;
     KeyHandler keyH;
 
-    public final int screenX;
-    public final int screenY;
+    public final int screenX; // координата игрока по оси Х
+    public final int screenY; // координата игрока по оси Y
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
@@ -29,6 +37,10 @@ public class Player extends Entity{
         getPlayerImage();
     }
 
+
+    /**
+     * Метод, устанавливающий дефолтные параметры игрока
+     */
     public void setDefaultValues() {
         worldX = gp.tileSize * 23;
         worldY = gp.tileSize * 21;
@@ -36,6 +48,9 @@ public class Player extends Entity{
         direction = "down";
     }
 
+    /**
+     * Метод, получающий картинки для анимации передвижения игрока
+     */
     public void getPlayerImage() {
         try {
             up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/player_up_1.png")));
@@ -51,6 +66,9 @@ public class Player extends Entity{
         }
     }
 
+    /**
+     * Метод, обновляющий положение игрока на карте, его коллизию и анимации передвижения
+     */
     public void update() {
 
         if(keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
@@ -94,6 +112,9 @@ public class Player extends Entity{
         }
     }
 
+    /**
+     * Метод, отрисовывающий анимации игрока
+     */
     public void draw(Graphics2D g2) {
         BufferedImage image = null;
 

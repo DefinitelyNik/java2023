@@ -7,6 +7,15 @@ import tile.TileManager;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Игровая панель.
+ * Позволяет игре работать(запускает её, обновляет данные о карте, сущностях(включая игрока) и объектах).
+ * Задает начальные параметры игры(разрешение, размер моделей сущностей и объектов и другие)
+ * Отрисовывает карту, сущности и объекты.
+ * Карта состоит из большого числа плиток заданного размера.
+ * Сущность и объект представляет собой 1 плитку того же заданного размера.
+ *
+ */
 public class GamePanel extends JPanel implements Runnable{
 
     //Настройки экрана
@@ -26,12 +35,16 @@ public class GamePanel extends JPanel implements Runnable{
 
     int FPS = 60; // значение FPS в игре
 
-    TileManager tileM = new TileManager(this);
-    KeyHandler keyH = new KeyHandler();
+
+    /**
+     * Вызов различных хендлеров
+     */
+    TileManager tileM = new TileManager(this); // Отрисовывает всю карту
+    KeyHandler keyH = new KeyHandler(); // Хендлер нажатия клавиш
     Thread gameThread;
-    public CollisionChecker cChecker = new CollisionChecker(this);
-    public AssetSetter aSetter = new AssetSetter(this);
-    public Player player = new Player(this, keyH);
+    public CollisionChecker cChecker = new CollisionChecker(this); // Проверка коллизий
+    public AssetSetter aSetter = new AssetSetter(this); // Расставляет объекты по карте, созданные этим сеттером
+    public Player player = new Player(this, keyH); // Хеднлер игрока
     public SuperObject obj[] = new SuperObject[10]; // Будет отрисовываться максимум по 10 объектов за раз
 
 
@@ -50,6 +63,9 @@ public class GamePanel extends JPanel implements Runnable{
         aSetter.setObject();
     }
 
+    /**
+     * Запускает game loop
+     */
     public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start();
@@ -90,11 +106,16 @@ public class GamePanel extends JPanel implements Runnable{
         }
     }
 
-
+    /**
+     * Обновляет данные об игроке(тем самым игрок двигается, прогружается карта вокруг него и т.д.)
+     */
     public void update(){
         player.update();
     }
 
+    /**
+     * Отрисовывает всё(карту, модели, объекты и т.д.)
+     */
     public void paintComponent(Graphics g) {
 
         super.paintComponent(g);

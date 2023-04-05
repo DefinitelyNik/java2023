@@ -6,7 +6,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * parent class for all object classes
+ * Родительский класс для всех объектов игры
+ * Расставляет объекты по карте и рисует их модели
  */
 public class SuperObject {
     public BufferedImage image;

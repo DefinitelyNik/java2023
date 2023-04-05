@@ -5,7 +5,7 @@ import object.OBJ_Door;
 import object.OBJ_Key;
 
 /**
- * This class will handle all placement stuff
+ * Этот класс создаёт объекты и назначает координаты их положения на карте
  */
 public class AssetSetter {
     GamePanel gp;

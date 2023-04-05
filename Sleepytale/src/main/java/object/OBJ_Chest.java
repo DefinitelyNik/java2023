@@ -4,6 +4,10 @@ import javax.imageio.ImageIO;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * Класс сундук
+ * Нужен для создания объектов этого класса
+ */
 public class OBJ_Chest extends SuperObject{
     public OBJ_Chest() {
         name = "Chest";

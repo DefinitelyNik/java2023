@@ -3,6 +3,10 @@ package org.game;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * Хендлер нажатых клавиш
+ * Позволяет игроку двигаться в 4 стороны(в зависимости от нажатой клавиши)
+ */
 public class KeyHandler implements KeyListener {
 
     public boolean upPressed, downPressed, leftPressed, rightPressed;

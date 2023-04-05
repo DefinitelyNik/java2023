@@ -5,7 +5,8 @@ import java.io.IOException;
 import java.util.Objects;
 
 /**
- * Key object
+ * Класс ключ
+ * Нужен для создания объектов этого класса
  */
 public class OBJ_Key extends SuperObject{
     public OBJ_Key() {

@@ -10,6 +10,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Objects;
 
+/**
+ * Класс менеджера плиток
+ * Устаналивает количество плиток в мире
+ * Устанавливает изображение каждой плитки, использующейся в игре
+ * Прорисовывает карту, используя текстовый файл, в котором установлено положение каждой плитки
+ */
 public class TileManager {
     GamePanel gp;
     public Tile[] tile;
@@ -24,6 +30,9 @@ public class TileManager {
         loadMap("/maps/world01.txt");
     }
 
+    /**
+     * Получение изображение каждой плитки
+     */
     public void getTileImage() {
         try {
             tile[0] = new Tile();
@@ -52,6 +61,9 @@ public class TileManager {
         }
     }
 
+    /**
+     * Загрузка карты с помощью текстового файла с информацией о положении плиток
+     */
     public void loadMap(String filePath) {
         try {
             InputStream is = getClass().getResourceAsStream(filePath);
@@ -82,6 +94,9 @@ public class TileManager {
         }
     }
 
+    /**
+     * Отрисовка карты
+     */
     public void draw(Graphics2D g2) {
         int worldCol = 0;
         int worldRow = 0;
