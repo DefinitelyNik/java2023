@@ -15,5 +15,7 @@ public class Entity {
     public int spriteCounter = 0; // Переменная для отрисовки анимации передвижения сущностей
     public int spriteNum = 1; // Переменная для отрисовки анимации передвижения сущностей
     public Rectangle solidArea; // Область коллизии сущности(Квадрат, размер которого меньше, чем размер модели сущности)
+    public int solidAreaDefaultX, solidAreaDefaultY;
+
     public boolean collisionOn = false; // Есть коллизия или нет
 }

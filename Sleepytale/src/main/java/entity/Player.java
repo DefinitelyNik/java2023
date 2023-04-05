@@ -23,6 +23,7 @@ public class Player extends Entity{
 
     public final int screenX; // координата игрока по оси Х
     public final int screenY; // координата игрока по оси Y
+    int hasKey = 0;// Сколько ключей есть у игрока
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
@@ -32,6 +33,8 @@ public class Player extends Entity{
         screenY = gp.screenHeight/2 - (gp.tileSize/2);
 
         solidArea = new Rectangle(26, 32, 12, 24);
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
 
         setDefaultValues();
         getPlayerImage();
@@ -90,6 +93,10 @@ public class Player extends Entity{
             collisionOn = false;
             gp.cChecker.CheckTile(this);
 
+            // Проверка коллизии объектов
+            int objIndex = gp.cChecker.checkObject(this, true);
+            pickUpObject(objIndex);
+
             // Если коллизии нет, игрок может двигаться
             if(!collisionOn) {
                 switch (direction) {
@@ -108,6 +115,25 @@ public class Player extends Entity{
                     spriteNum = 1;
                 }
                 spriteCounter = 0;
+            }
+        }
+    }
+
+    public void pickUpObject(int i) {
+        if(i != 999) {
+            String objectName = gp.obj[i].name;
+
+            switch (objectName) {
+                case "Key" -> {
+                    hasKey++;
+                    gp.obj[i] = null;
+                }
+                case "Door" -> {
+                    if (hasKey > 0) {
+                        gp.obj[i] = null;
+                        hasKey--;
+                    }
+                }
             }
         }
     }
