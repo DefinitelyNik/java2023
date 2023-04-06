@@ -125,14 +125,21 @@ public class Player extends Entity{
 
             switch (objectName) {
                 case "Key" -> {
+                    gp.playSE(1); // звук монеты
                     hasKey++;
                     gp.obj[i] = null;
                 }
                 case "Door" -> {
                     if (hasKey > 0) {
+                        gp.playSE(3); // звук двери
                         gp.obj[i] = null;
                         hasKey--;
                     }
+                }
+                case "Boots" -> {
+                    gp.playSE(2); // звук предмета
+                    speed += 2;
+                    gp.obj[i] = null;
                 }
             }
         }
