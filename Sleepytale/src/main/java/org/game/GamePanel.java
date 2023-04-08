@@ -39,14 +39,16 @@ public class GamePanel extends JPanel implements Runnable{
      */
     TileManager tileM = new TileManager(this); // Отрисовывает всю карту
     KeyHandler keyH = new KeyHandler(); // Хендлер нажатия клавиш
-    Sound sound = new Sound();
+    Sound music = new Sound(); // Хендлер музыки
+    Sound se = new Sound(); // Хендлер звуков(sound effect)
     public CollisionChecker cChecker = new CollisionChecker(this); // Проверка коллизий
     public AssetSetter aSetter = new AssetSetter(this); // Расставляет объекты по карте, созданные этим сеттером
+    public UI ui = new UI(this);
     Thread gameThread;
 
     // Сущности и объекты
     public Player player = new Player(this, keyH); // Хеднлер игрока
-    public SuperObject obj[] = new SuperObject[10]; // Будет отрисовываться максимум по 10 объектов за раз
+    public SuperObject[] obj = new SuperObject[10]; // Будет отрисовываться максимум по 10 объектов за раз
 
 
     public GamePanel() {
@@ -62,7 +64,6 @@ public class GamePanel extends JPanel implements Runnable{
      */
     public void setupGame() {
         aSetter.setObject();
-
         playMusic(0);
     }
 
@@ -119,6 +120,7 @@ public class GamePanel extends JPanel implements Runnable{
     /**
      * Отрисовывает всё(карту, модели, объекты и т.д.)
      */
+    @Override
     public void paintComponent(Graphics g) {
 
         super.paintComponent(g);
@@ -136,21 +138,24 @@ public class GamePanel extends JPanel implements Runnable{
         // Player
         player.draw(g2);
 
+        // UI
+        ui.draw(g2);
+
         g2.dispose();
     }
 
     public void playMusic(int i) {
-        sound.setFile(i);
-        sound.play();
-        sound.loop();
+        music.setFile(i);
+        music.play();
+        music.loop();
     }
 
     public void stopMusic() {
-        sound.stop();
+        music.stop();
     }
 
     public void playSE(int i) {
-        sound.setFile(i);
-        sound.play();
+        se.setFile(i);
+        se.play();
     }
 }
