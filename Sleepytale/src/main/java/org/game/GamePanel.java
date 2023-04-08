@@ -19,19 +19,19 @@ import java.awt.*;
 public class GamePanel extends JPanel implements Runnable{
 
     //Настройки экрана
-    final int originalTileSize = 64; // 64х64 - оригинальный размер плитки
-    final int scale = 1;
-    public final int tileSize = originalTileSize * scale; // 64х64 - итоговый размер плитки
-    public final int maxScreenCol = 16; // максимальное количество плиток по горизонтали(колонок)
-    public final int maxScreenRow = 12; // максимальное количество плиток по вертикали(строк)
-    public final int screenWidth = tileSize * maxScreenCol; // ширина окна(1024 пикселей)
-    public final int screenHeight = tileSize * maxScreenRow; // высота окна(768 пикселей)
+    static final int ORIGINAL_TILE_SIZE = 64; // 64х64 - оригинальный размер плитки
+    static final int SCALE = 1;
+    public static final int TILE_SIZE = ORIGINAL_TILE_SIZE * SCALE; // 64х64 - итоговый размер плитки
+    public static final int MAX_SCREEN_COL = 16; // максимальное количество плиток по горизонтали(колонок)
+    public static final int MAX_SCREEN_ROW = 12; // максимальное количество плиток по вертикали(строк)
+    public static final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COL; // ширина окна(1024 пикселей)
+    public static final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROW; // высота окна(768 пикселей)
 
     // Настройки мира
-    public final int maxWorldCol = 50;
-    public final int maxWorldRow = 50;
+    public static final int MAX_WORLD_COL = 50;
+    public static final int MAX_WORLD_ROW = 50;
 
-    int FPS = 60; // значение FPS в игре
+    int fps = 60; // значение FPS в игре
 
 
     /**
@@ -52,7 +52,7 @@ public class GamePanel extends JPanel implements Runnable{
 
 
     public GamePanel() {
-        this.setPreferredSize(new Dimension(screenWidth, screenHeight));
+        this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
@@ -78,7 +78,7 @@ public class GamePanel extends JPanel implements Runnable{
     @Override
     public void run() {
 
-        double drawInterval = 1000000000/FPS; // 0.01666 seconds
+        double drawInterval = 1000000000/(double)fps; // 0.01666 seconds
         double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;
