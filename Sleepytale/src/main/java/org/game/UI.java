@@ -47,39 +47,39 @@ public class UI {
 
             text = "You found the treasure!";
             textLength = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth(); // return length of the text variable
-            x = GamePanel.SCREEN_WIDTH /2 - textLength/2;
-            y = GamePanel.SCREEN_HEIGHT /2 - (GamePanel.TILE_SIZE *3);
+            x = gp.screenWidth /2 - textLength/2;
+            y = gp.screenHeight /2 - (gp.tileSize *3);
             g2.drawString(text, x, y);
 
             text = "Your time is :" + dFormat.format(playTime) + "!";
             textLength = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth(); // return length of the text variable
-            x = GamePanel.SCREEN_WIDTH /2 - textLength/2;
-            y = GamePanel.SCREEN_HEIGHT /2 + (GamePanel.TILE_SIZE);
+            x = gp.screenWidth /2 - textLength/2;
+            y = gp.screenHeight /2 + (gp.tileSize);
             g2.drawString(text, x, y);
 
             g2.setFont(arial_80B);
             g2.setColor(Color.yellow);
             text = "Congratulations!";
             textLength = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth(); // return length of the text variable
-            x = GamePanel.SCREEN_WIDTH /2 - textLength/2;
-            y = GamePanel.SCREEN_HEIGHT /2 - (GamePanel.TILE_SIZE);
+            x = gp.screenWidth /2 - textLength/2;
+            y = gp.screenHeight /2 - (gp.tileSize);
             g2.drawString(text, x, y);
 
             gp.gameThread = null;
         } else {
             g2.setFont(arial_40);
             g2.setColor(Color.white);
-            g2.drawImage(keyImage, GamePanel.TILE_SIZE /4, GamePanel.TILE_SIZE /4, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
+            g2.drawImage(keyImage, gp.tileSize /4, gp.tileSize /4, gp.tileSize, gp.tileSize, null);
             g2.drawString("x " + gp.player.hasKey, 80, 65);
 
             // Время
             playTime += (double)1/60;
-            g2.drawString("Time: " + dFormat.format(playTime), GamePanel.TILE_SIZE *13, 65);
+            g2.drawString("Time: " + dFormat.format(playTime), gp.tileSize * 13, 65);
 
             // Сообщение
             if(messageOn) {
                 g2.setFont(g2.getFont().deriveFont(30F));
-                g2.drawString(message, GamePanel.TILE_SIZE /4, GamePanel.TILE_SIZE *5);
+                g2.drawString(message, gp.tileSize /4, gp.tileSize * 5);
 
                 messageCounter++;
 

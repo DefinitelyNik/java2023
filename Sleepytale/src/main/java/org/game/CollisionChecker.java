@@ -23,10 +23,10 @@ public class CollisionChecker {
         int entityTopWorldY = entity.worldY + entity.solidArea.y; // координата верхнего края области коллизии
         int entityBottomWorldY = entity.worldY + entity.solidArea.y + entity.solidArea.height; // координата нижнего края области коллизии
 
-        int entityLeftCol = entityLeftWorldX/ GamePanel.TILE_SIZE;
-        int entityRightCol = entityRightWorldX/ GamePanel.TILE_SIZE;
-        int entityTopRow = entityTopWorldY/ GamePanel.TILE_SIZE;
-        int entityBottomRow = entityBottomWorldY/ GamePanel.TILE_SIZE;
+        int entityLeftCol = entityLeftWorldX/ gp.tileSize;
+        int entityRightCol = entityRightWorldX/ gp.tileSize;
+        int entityTopRow = entityTopWorldY/ gp.tileSize;
+        int entityBottomRow = entityBottomWorldY/ gp.tileSize;
 
         int tileNum1, tileNum2; // две координаты стороны области коллизии
 
@@ -36,7 +36,7 @@ public class CollisionChecker {
          */
         switch (entity.direction) {
             case "up" -> {
-                entityTopRow = (entityTopWorldY - entity.speed) / GamePanel.TILE_SIZE;
+                entityTopRow = (entityTopWorldY - entity.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
                 tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
                 if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
@@ -44,7 +44,7 @@ public class CollisionChecker {
                 }
             }
             case "down" -> {
-                entityBottomRow = (entityBottomWorldY + entity.speed) / GamePanel.TILE_SIZE;
+                entityBottomRow = (entityBottomWorldY + entity.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
                 tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
                 if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
@@ -52,7 +52,7 @@ public class CollisionChecker {
                 }
             }
             case "left" -> {
-                entityLeftCol = (entityLeftWorldX - entity.speed) / GamePanel.TILE_SIZE;
+                entityLeftCol = (entityLeftWorldX - entity.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[entityLeftCol][entityTopRow];
                 tileNum2 = gp.tileM.mapTileNum[entityLeftCol][entityBottomRow];
                 if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {
@@ -60,7 +60,7 @@ public class CollisionChecker {
                 }
             }
             case "right" -> {
-                entityRightCol = (entityRightWorldX + entity.speed) / GamePanel.TILE_SIZE;
+                entityRightCol = (entityRightWorldX + entity.speed) / gp.tileSize;
                 tileNum1 = gp.tileM.mapTileNum[entityRightCol][entityTopRow];
                 tileNum2 = gp.tileM.mapTileNum[entityRightCol][entityBottomRow];
                 if (gp.tileM.tile[tileNum1].collision || gp.tileM.tile[tileNum2].collision) {

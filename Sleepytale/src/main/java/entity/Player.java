@@ -29,8 +29,8 @@ public class Player extends Entity{
         this.gp = gp;
         this.keyH = keyH;
 
-        screenX = GamePanel.SCREEN_WIDTH /2 - (GamePanel.TILE_SIZE /2);
-        screenY = GamePanel.SCREEN_HEIGHT /2 - (GamePanel.TILE_SIZE /2);
+        screenX = gp.screenWidth /2 - (gp.tileSize /2);
+        screenY = gp.screenHeight /2 - (gp.tileSize /2);
 
         solidArea = new Rectangle(26, 32, 12, 24);
         solidAreaDefaultX = solidArea.x;
@@ -45,8 +45,8 @@ public class Player extends Entity{
      * Метод, устанавливающий дефолтные параметры игрока
      */
     public void setDefaultValues() {
-        worldX = GamePanel.TILE_SIZE * 23;
-        worldY = GamePanel.TILE_SIZE * 21;
+        worldX = gp.tileSize * 23;
+        worldY = gp.tileSize * 21;
         speed = 4;
         direction = "down";
     }
@@ -196,6 +196,6 @@ public class Player extends Entity{
                 }
             }
         }
-        g2.drawImage(image, screenX, screenY, GamePanel.TILE_SIZE, GamePanel.TILE_SIZE, null);
+        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
     }
 }
