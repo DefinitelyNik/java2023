@@ -1,6 +1,7 @@
 package object;
 
 import org.game.GamePanel;
+import org.game.UtilityTool;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -17,6 +18,7 @@ public class SuperObject {
     public Rectangle solidArea = new Rectangle(0,0,64,64); // Зона коллизии объекта (64х64 пикселя)
     public int solidAreaDefaultX = 0;
     public int getSolidAreaDefaultY = 0;
+    UtilityTool uTool = new UtilityTool();
 
     public void draw(Graphics2D g2, GamePanel gp) {
         int screenX = worldX - gp.player.worldX + gp.player.screenX;
