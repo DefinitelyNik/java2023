@@ -24,7 +24,6 @@ public class Player extends Entity{
 
     public final int screenX; // координата игрока по оси Х
     public final int screenY; // координата игрока по оси Y
-    public int hasKey = 0;// Сколько ключей есть у игрока
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
@@ -134,38 +133,7 @@ public class Player extends Entity{
 
     public void pickUpObject(int i) {
         if(i != 999) {
-            String objectName = gp.obj[i].name;
-
-            switch (objectName) {
-                case "Key" -> {
-                    gp.playSE(1); // звук монеты
-                    hasKey++;
-                    gp.obj[i] = null;
-                    gp.ui.showMessage("You got a key!");
-                }
-                case "Door" -> {
-                    if (hasKey > 0) {
-                        gp.playSE(3); // звук двери
-                        gp.obj[i] = null;
-                        hasKey--;
-                        gp.ui.showMessage("You opened the door!");
-                    }
-                    else {
-                        gp.ui.showMessage("You need a key!");
-                    }
-                }
-                case "Boots" -> {
-                    gp.playSE(2); // звук предмета
-                    speed += 2;
-                    gp.obj[i] = null;
-                    gp.ui.showMessage("Speed up!");
-                }
-                case "Chest" -> {
-                    gp.ui.gameFinished = true;
-                    gp.stopMusic();
-                    gp.playSE(4);
-                }
-            }
+            //Тут будут новые объекты
         }
     }
 

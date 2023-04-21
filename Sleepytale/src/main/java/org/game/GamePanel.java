@@ -38,7 +38,7 @@ public class GamePanel extends JPanel implements Runnable{
      * Вызов различных хендлеров
      */
     TileManager tileM = new TileManager(this); // Отрисовывает всю карту
-    KeyHandler keyH = new KeyHandler(); // Хендлер нажатия клавиш
+    KeyHandler keyH = new KeyHandler(this); // Хендлер нажатия клавиш
     Sound music = new Sound(); // Хендлер музыки
     Sound se = new Sound(); // Хендлер звуков(sound effect)
     public CollisionChecker cChecker = new CollisionChecker(this); // Проверка коллизий
@@ -49,6 +49,11 @@ public class GamePanel extends JPanel implements Runnable{
     // Сущности и объекты
     public Player player = new Player(this, keyH); // Хеднлер игрока
     public SuperObject[] obj = new SuperObject[10]; // Будет отрисовываться максимум по 10 объектов за раз
+
+    // Состояние игры(пауза и т.д.)
+    public int gameState;
+    public final int playState = 1;
+    public final int pauseState = 2;
 
 
     public GamePanel() {
@@ -65,6 +70,8 @@ public class GamePanel extends JPanel implements Runnable{
     public void setupGame() {
         aSetter.setObject();
         playMusic(0);
+        //stopMusic();
+        gameState = playState;
     }
 
     /**
@@ -114,7 +121,12 @@ public class GamePanel extends JPanel implements Runnable{
      * Обновляет данные об игроке(тем самым игрок двигается, прогружается карта вокруг него и т.д.)
      */
     public void update(){
-        player.update();
+        if(gameState == playState) {
+            player.update();
+        }
+        if(gameState == pauseState) {
+
+        }
     }
 
     /**
