@@ -51,7 +51,7 @@ public class UI {
             y = gp.screenHeight /2 - (gp.tileSize *3);
             g2.drawString(text, x, y);
 
-            text = "Your time is :" + dFormat.format(playTime) + "!";
+            text = "Your time is: " + dFormat.format(playTime) + "!";
             textLength = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth(); // return length of the text variable
             x = gp.screenWidth /2 - textLength/2;
             y = gp.screenHeight /2 + (gp.tileSize);
