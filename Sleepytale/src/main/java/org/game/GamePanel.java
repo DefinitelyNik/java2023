@@ -1,5 +1,6 @@
 package org.game;
 
+import entity.Entity;
 import entity.Player;
 import object.SuperObject;
 import tile.TileManager;
@@ -49,6 +50,7 @@ public class GamePanel extends JPanel implements Runnable{
     // Сущности и объекты
     public Player player = new Player(this, keyH); // Хеднлер игрока
     public SuperObject[] obj = new SuperObject[10]; // Будет отрисовываться максимум по 10 объектов за раз
+    public Entity[] npc = new Entity[10];
 
     // Состояние игры(пауза и т.д.)
     public int gameState;
@@ -69,6 +71,7 @@ public class GamePanel extends JPanel implements Runnable{
      */
     public void setupGame() {
         aSetter.setObject();
+        aSetter.setNPC();
         playMusic(0);
         //stopMusic();
         gameState = playState;
@@ -122,7 +125,15 @@ public class GamePanel extends JPanel implements Runnable{
      */
     public void update(){
         if(gameState == playState) {
+            // Игрок
             player.update();
+
+            // Сущности
+            for (Entity entity : npc) {
+                if (entity != null) {
+                    entity.update();
+                }
+            }
         }
         if(gameState == pauseState) {
 
@@ -149,6 +160,13 @@ public class GamePanel extends JPanel implements Runnable{
         // Object
         for (SuperObject superObject : obj) {
             if (superObject != null) superObject.draw(g2, this);
+        }
+
+        //NPC
+        for (Entity entity : npc) {
+            if (entity != null) {
+                entity.draw(g2);
+            }
         }
 
         // Player

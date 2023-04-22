@@ -2,13 +2,9 @@ package entity;
 
 import org.game.GamePanel;
 import org.game.KeyHandler;
-import org.game.UtilityTool;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.Objects;
 
 /**
  * Класс игрока
@@ -19,14 +15,15 @@ import java.util.Objects;
  * Отрисовывается сам игрок и его анимации
  */
 public class Player extends Entity{
-    GamePanel gp;
     KeyHandler keyH;
 
     public final int screenX; // координата игрока по оси Х
     public final int screenY; // координата игрока по оси Y
 
     public Player(GamePanel gp, KeyHandler keyH) {
-        this.gp = gp;
+
+        super(gp);
+
         this.keyH = keyH;
 
         screenX = gp.screenWidth /2 - (gp.tileSize /2);
@@ -55,30 +52,14 @@ public class Player extends Entity{
      * Метод, получающий картинки для анимации передвижения игрока
      */
     public void getPlayerImage() {
-        up1 = setup("player_up_1");
-        up2 = setup("player_up_2");
-        down1 = setup("player_down_1");
-        down2 = setup("player_down_2");
-        left1 = setup("player_left_1");
-        left2 = setup("player_left_2");
-        right1 = setup("player_right_1");
-        right2 = setup("player_right_2");
-    }
-
-    /**
-     * Настройка изображения модели игрока(масштабирование)
-     */
-    public BufferedImage setup(String imageName) {
-        UtilityTool uTool = new UtilityTool();
-        BufferedImage image = null;
-
-        try {
-            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/" + imageName +".png")));
-            image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
-        return image;
+        up1 = setup("/player/player_up_1");
+        up2 = setup("/player/player_up_2");
+        down1 = setup("/player/player_down_1");
+        down2 = setup("/player/player_down_2");
+        left1 = setup("/player/player_left_1");
+        left2 = setup("/player/player_left_2");
+        right1 = setup("/player/player_right_1");
+        right2 = setup("/player/player_right_2");
     }
 
     /**
@@ -103,11 +84,15 @@ public class Player extends Entity{
 
             // Проверка коллизии плитки
             collisionOn = false;
-            gp.cChecker.CheckTile(this);
+            gp.cChecker.checkTile(this);
 
             // Проверка коллизии объектов
             int objIndex = gp.cChecker.checkObject(this, true);
             pickUpObject(objIndex);
+
+            // Проверка коллизии сущностей
+            int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
+            interactNPC(npcIndex);
 
             // Если коллизии нет, игрок может двигаться
             if(!collisionOn) {
@@ -134,6 +119,12 @@ public class Player extends Entity{
     public void pickUpObject(int i) {
         if(i != 999) {
             //Тут будут новые объекты
+        }
+    }
+
+    public void interactNPC(int i) {
+        if(i != 999) {
+            System.out.println("You are hitting an npc");
         }
     }
 
