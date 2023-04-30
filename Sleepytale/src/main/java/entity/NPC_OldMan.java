@@ -4,7 +4,7 @@ import org.game.GamePanel;
 
 import java.util.Random;
 
-public class NPC_OldMan extends Entity{
+public class NPC_OldMan extends Entity {
 
     public NPC_OldMan(GamePanel gp) {
         super(gp);
@@ -13,6 +13,7 @@ public class NPC_OldMan extends Entity{
         speed = 1;
 
         getImage();
+        setDialogue();
     }
 
     public void getImage() {
@@ -24,6 +25,13 @@ public class NPC_OldMan extends Entity{
         left2 = setup("/npc/oldman_left_2");
         right1 = setup("/npc/oldman_right_1");
         right2 = setup("/npc/oldman_right_2");
+    }
+
+    public void setDialogue() {
+        dialogues[0] = "Hello, traveller!";
+        dialogues[1] = "So you've come to this island to find the treasure, right?";
+        dialogues[2] = "Go ahead and find it if you are brave enough";
+        dialogues[3] = "Good luck, traveller!";
     }
 
     public void setAction()
@@ -49,5 +57,10 @@ public class NPC_OldMan extends Entity{
 
             actionLockCounter = 0;
         }
+    }
+
+    public void speak() {
+        // тут будет нечто, характерное только для этого персонажа
+        super.speak();
     }
 }

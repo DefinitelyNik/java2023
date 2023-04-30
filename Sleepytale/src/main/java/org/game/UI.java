@@ -1,10 +1,6 @@
 package org.game;
 
-import object.OBJ_Key;
-
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.text.DecimalFormat;
 
 /**
  * This class will handle all screen UI
@@ -18,8 +14,7 @@ public class UI {
     public String message = "";
     int messageCounter = 0; // frames
     public boolean gameFinished = false;
-    double playTime;
-    DecimalFormat dFormat = new DecimalFormat("#0.00");
+    public String currentDialogue = "";
 
     public UI(GamePanel gp) {
         this.gp = gp;
@@ -39,11 +34,17 @@ public class UI {
         g2.setFont(arial_40);
         g2.setColor(Color.white);
 
+        // Состояние игры(идёт игра)
         if(gp.gameState == gp.playState) {
 
         }
+        // Состояние игры(пауза)
         if(gp.gameState == gp.pauseState) {
             drawPauseScreen();
+        }
+        // Состояние игры(диалог)
+        if(gp.gameState == gp.dialogueState) {
+            drawDialogueScreen();
         }
     }
 
@@ -54,6 +55,36 @@ public class UI {
         int y = gp.screenHeight/2;
 
         g2.drawString(text, x, y);
+    }
+
+    public void drawDialogueScreen() {
+        // Окно диалога
+        int x = gp.tileSize;
+        int y = gp.screenHeight - gp.tileSize * 5;
+        int width = gp.screenWidth - (gp.tileSize * 2);
+        int height = gp.tileSize * 4;
+
+        drawSubWindow(x, y, width, height);
+
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32F));
+        x += gp.tileSize;
+        y += gp.tileSize;
+
+        for(String line : currentDialogue.split("/n")) {
+            g2.drawString(line, x, y);
+            y += 40;
+        }
+    }
+
+    public void drawSubWindow(int x, int y, int width, int height) {
+        Color c = new Color(0,0,0, 200);
+        g2.setColor(c);
+        g2.fillRoundRect(x, y, width, height, 35, 35);
+
+        c = new Color(255, 255, 255);
+        g2.setColor(c);
+        g2.setStroke(new BasicStroke(5));
+        g2.drawRoundRect(x+5, y+5, width-10, height-10, 25, 25);
     }
 
     public int getXForCenteredText(String text) {

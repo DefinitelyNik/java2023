@@ -39,7 +39,7 @@ public class GamePanel extends JPanel implements Runnable{
      * Вызов различных хендлеров
      */
     TileManager tileM = new TileManager(this); // Отрисовывает всю карту
-    KeyHandler keyH = new KeyHandler(this); // Хендлер нажатия клавиш
+    public KeyHandler keyH = new KeyHandler(this); // Хендлер нажатия клавиш
     Sound music = new Sound(); // Хендлер музыки
     Sound se = new Sound(); // Хендлер звуков(sound effect)
     public CollisionChecker cChecker = new CollisionChecker(this); // Проверка коллизий
@@ -56,6 +56,7 @@ public class GamePanel extends JPanel implements Runnable{
     public int gameState;
     public final int playState = 1;
     public final int pauseState = 2;
+    public final int dialogueState = 3;
 
 
     public GamePanel() {
@@ -111,7 +112,7 @@ public class GamePanel extends JPanel implements Runnable{
             }
 
 
-            //Checking the actual FPS
+            // Проверка фпс
             if(timer >= 1000000000) {
                 System.out.println("FPS:" + drawCount);
                 drawCount = 0;

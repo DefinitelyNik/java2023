@@ -25,6 +25,8 @@ public class Entity {
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionOn = false; // Есть коллизия или нет
     public int actionLockCounter = 0; // Переменная, которая нужна для того, чтобы сущности не совершали миллион действий в секунду(что-то типа задержки между действиями)
+    String[] dialogues = new String[20];
+    int dialogueIndex = 0;
 
     public Entity(GamePanel gp) {
         this.gp = gp;
@@ -32,6 +34,23 @@ public class Entity {
 
     public void setAction() {
 
+    }
+
+    public void speak() {
+
+        if(dialogues[dialogueIndex] == null) {
+            dialogueIndex = 0;
+        }
+
+        gp.ui.currentDialogue = dialogues[dialogueIndex];
+        dialogueIndex++;
+
+        switch (gp.player.direction) {
+            case "up" -> direction = "down";
+            case "down" -> direction = "up";
+            case "left" -> direction = "right";
+            case "right" -> direction = "left";
+        }
     }
 
     public void update() {
