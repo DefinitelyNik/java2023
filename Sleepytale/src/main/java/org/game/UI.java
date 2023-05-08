@@ -1,6 +1,10 @@
 package org.game;
 
+import object.OBJ_Heart;
+import object.SuperObject;
+
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -11,6 +15,7 @@ public class UI {
     GamePanel gp;
     Graphics2D g2;
     Font maruMonica;// arial 40px font
+    BufferedImage heart_full, heart_half, heart_blank;
     public boolean messageOn = false;
     public String message = "";
     int messageCounter = 0; // frames
@@ -28,6 +33,12 @@ public class UI {
         } catch (FontFormatException | IOException e) {
             throw new RuntimeException(e);
         }
+
+        // Создание hud'а
+        SuperObject heart = new OBJ_Heart(gp);
+        heart_full = heart.image;
+        heart_half = heart.image2;
+        heart_blank = heart.image3;
     }
 
     public void showMessage(String text) {
@@ -48,15 +59,48 @@ public class UI {
 
         // Состояние игры(идёт игра)
         if(gp.gameState == gp.playState) {
-
+            drawPlayerLife();
         }
         // Состояние игры(пауза)
         if(gp.gameState == gp.pauseState) {
+            drawPlayerLife();
             drawPauseScreen();
         }
         // Состояние игры(диалог)
         if(gp.gameState == gp.dialogueState) {
+            drawPlayerLife();
             drawDialogueScreen();
+        }
+    }
+
+    public void drawPlayerLife() {
+        int x = gp.tileSize/2;
+        int y = gp.tileSize/2;
+        int i = 0;
+
+        // Прорисовка пустых сердец
+        while(i < gp.player.maxLife/2) {
+            g2.drawImage(heart_blank, x, y, null);
+            i++;
+            x += gp.tileSize;
+        }
+
+        // Возвращаем исходные значения
+        x = gp.tileSize/2;
+        y = gp.tileSize/2;
+        i = 0;
+
+        // Прорисовка текущего количества хп
+        while(i < gp.player.life) {
+            g2.drawImage(heart_half, x, y, null);
+            i++;
+
+            if(i < gp.player.life) {
+                g2.drawImage(heart_full, x, y, null);
+            }
+
+            i++;
+            x += gp.tileSize;
         }
     }
 
@@ -115,7 +159,7 @@ public class UI {
         }
         else if(titleScreenState == 1) {
 
-            // вфаыва
+            // Второе меню с выбором класса персонажа
             g2.setColor(Color.white);
             g2.setFont(g2.getFont().deriveFont(42F));
 

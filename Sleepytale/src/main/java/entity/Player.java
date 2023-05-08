@@ -46,6 +46,10 @@ public class Player extends Entity{
         worldY = gp.tileSize * 21;
         speed = 4;
         direction = "down";
+
+        // Статус игрока
+        maxLife = 6; // 1 жизнь = 1 половина сердечка на экране
+        life = maxLife;
     }
 
     /**
