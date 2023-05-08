@@ -16,6 +16,8 @@ public class UI {
     int messageCounter = 0; // frames
     public boolean gameFinished = false;
     public String currentDialogue = "";
+    public int commandNum = 0;
+    public int titleScreenState = 0; // 0: первый страница загрузочного экрана 1: вторая страница и т.д.
 
     public UI(GamePanel gp) {
         this.gp = gp;
@@ -23,9 +25,7 @@ public class UI {
         try {
             InputStream is = getClass().getResourceAsStream("/font/x12y16pxMaruMonica.ttf");
             maruMonica = Font.createFont(Font.TRUETYPE_FONT, is);
-        } catch (FontFormatException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+        } catch (FontFormatException | IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -41,6 +41,11 @@ public class UI {
         g2.setFont(maruMonica);
         g2.setColor(Color.white);
 
+        // Загрузочный экран
+        if(gp.gameState == gp.titleState) {
+            drawTitleScreen();
+        }
+
         // Состояние игры(идёт игра)
         if(gp.gameState == gp.playState) {
 
@@ -52,6 +57,104 @@ public class UI {
         // Состояние игры(диалог)
         if(gp.gameState == gp.dialogueState) {
             drawDialogueScreen();
+        }
+    }
+
+    public void drawTitleScreen() {
+
+        if(titleScreenState == 0) {
+            // Цвет фона
+            g2.setColor(new Color(0,0,0));
+            g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+
+            // Название игры на загрузочном экране
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
+            String text = "Sleepytale";
+            int x = getXForCenteredText(text);
+            int y = gp.tileSize * 3;
+
+            // Тень текста
+            g2.setColor(Color.darkGray);
+            g2.drawString(text, x+5, y+5);
+
+            // Основной цвет текста
+            g2.setColor(Color.white);
+            g2.drawString(text, x, y);
+
+            // Картинка персонажа
+            x = gp.screenWidth/2 - (gp.tileSize*2)/2;
+            y += gp.tileSize*2;
+            g2.drawImage(gp.player.down1, x, y, gp.tileSize*2, gp.tileSize*2, null);
+
+            // Меню
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 48F));
+
+            text = "NEW GAME";
+            x = getXForCenteredText(text);
+            y += gp.tileSize*3;
+            g2.drawString(text, x, y);
+            if(commandNum == 0) {
+                g2.drawString(">", x - gp.tileSize, y);
+            }
+
+            text = "LOAD GAME";
+            x = getXForCenteredText(text);
+            y += gp.tileSize;
+            g2.drawString(text, x, y);
+            if(commandNum == 1) {
+                g2.drawString(">", x - gp.tileSize, y);
+            }
+
+            text = "QUIT";
+            x = getXForCenteredText(text);
+            y += gp.tileSize;
+            g2.drawString(text, x, y);
+            if(commandNum == 2) {
+                g2.drawString(">", x - gp.tileSize, y);
+            }
+        }
+        else if(titleScreenState == 1) {
+
+            // вфаыва
+            g2.setColor(Color.white);
+            g2.setFont(g2.getFont().deriveFont(42F));
+
+            String text = "Select your class!";
+            int x = getXForCenteredText(text);
+            int y = gp.tileSize * 3;
+            g2.drawString(text, x, y);
+
+            text = "Fighter";
+            x = getXForCenteredText(text);
+            y += gp.tileSize * 3;
+            g2.drawString(text, x, y);
+            if(commandNum == 0) {
+                g2.drawString(">", x-gp.tileSize, y);
+            }
+
+            text = "Thief";
+            x = getXForCenteredText(text);
+            y += gp.tileSize;
+            g2.drawString(text, x, y);
+            if(commandNum == 1) {
+                g2.drawString(">", x-gp.tileSize, y);
+            }
+
+            text = "Sorcerer";
+            x = getXForCenteredText(text);
+            y += gp.tileSize;
+            g2.drawString(text, x, y);
+            if(commandNum == 2) {
+                g2.drawString(">", x-gp.tileSize, y);
+            }
+
+            text = "Back";
+            x = getXForCenteredText(text);
+            y += gp.tileSize * 2;
+            g2.drawString(text, x, y);
+            if(commandNum == 3) {
+                g2.drawString(">", x-gp.tileSize, y);
+            }
         }
     }
 
@@ -94,6 +197,10 @@ public class UI {
         g2.drawRoundRect(x+5, y+5, width-10, height-10, 25, 25);
     }
 
+    /**
+     * Метод, позволяющий вычислить координату х,
+     * чтобы правильно выровнять текст на экране(в зависимости от длинны строки)
+     */
     public int getXForCenteredText(String text) {
         int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         return gp.screenWidth/2 - length/2;
