@@ -3,7 +3,7 @@ package org.game;
 import entity.NPC_OldMan;
 
 /**
- * Этот класс создаёт объекты и назначает координаты их положения на карте
+ * Класс, создающий объекты и сущности и назначающий их координаты на карте
  */
 public class AssetSetter {
     GamePanel gp;

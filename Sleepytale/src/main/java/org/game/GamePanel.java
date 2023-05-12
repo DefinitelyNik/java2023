@@ -13,15 +13,14 @@ import java.awt.*;
  * Позволяет игре работать(запускает её, обновляет данные о карте, сущностях(включая игрока) и объектах).
  * Задает начальные параметры игры(разрешение, размер моделей сущностей и объектов и другие)
  * Отрисовывает карту, сущности и объекты.
- * Карта состоит из большого числа плиток заданного размера.
+ * Карта состоит из определенного числа плиток заданного размера.
  * Сущность и объект представляет собой 1 плитку того же заданного размера.
- *
  */
 public class GamePanel extends JPanel implements Runnable{
 
     //Настройки экрана
     final int originalTileSize = 64; // 64х64 - оригинальный размер плитки
-    final int scale = 1;
+    final int scale = 1; // Коэфицент масштабирования
     public final int tileSize = originalTileSize * scale; // 64х64 - итоговый размер плитки
     public final int maxScreenCol = 16; // максимальное количество плиток по горизонтали(колонок)
     public final int maxScreenRow = 12; // максимальное количество плиток по вертикали(строк)
@@ -29,8 +28,8 @@ public class GamePanel extends JPanel implements Runnable{
     public final int screenHeight = tileSize * maxScreenRow; // высота окна(768 пикселей)
 
     // Настройки мира
-    public final int maxWorldCol = 50;
-    public final int maxWorldRow = 50;
+    public final int maxWorldCol = 50; // Максимальное количество плиток на карте по вертикали
+    public final int maxWorldRow = 50; // Максимальное количество плиток на карте по горизонтали
 
     int fps = 60; // значение FPS в игре
 
@@ -44,13 +43,13 @@ public class GamePanel extends JPanel implements Runnable{
     Sound se = new Sound(); // Хендлер звуков(sound effect)
     public CollisionChecker cChecker = new CollisionChecker(this); // Проверка коллизий
     public AssetSetter aSetter = new AssetSetter(this); // Расставляет объекты по карте, созданные этим сеттером
-    public UI ui = new UI(this);
+    public UI ui = new UI(this); // Рисует окна, худ, объекты, шрифт и т.д.
     Thread gameThread;
 
     // Сущности и объекты
     public Player player = new Player(this, keyH); // Хеднлер игрока
-    public SuperObject[] obj = new SuperObject[10]; // Будет отрисовываться максимум по 10 объектов за раз
-    public Entity[] npc = new Entity[10];
+    public SuperObject[] obj = new SuperObject[10]; // Количество объектов в игре
+    public Entity[] npc = new Entity[10]; // Количество сущностей в игре
 
     // Состояние игры(пауза и т.д.)
     public int gameState;
@@ -69,7 +68,7 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     /**
-     * добавляет объекты в игру(на карту)
+     * Метод, добавляющий объекты в игру(на карту), поигрывающий музыку(если нужно) и т.д.
      */
     public void setupGame() {
         aSetter.setObject();
@@ -80,7 +79,7 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     /**
-     * Запускает game loop
+     * Метод, запускающий game loop
      */
     public void startGameThread() {
         gameThread = new Thread(this);
@@ -123,7 +122,8 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     /**
-     * Обновляет данные об игроке(тем самым игрок двигается, прогружается карта вокруг него и т.д.)
+     * Метод, обновляющий данные об игроке
+     * Тем самым игрок двигается, прогружается карта вокруг него и т.д.
      */
     public void update(){
         if(gameState == playState) {
@@ -197,16 +197,27 @@ public class GamePanel extends JPanel implements Runnable{
         g2.dispose();
     }
 
+    /**
+     * Метод, проигрывающий музыку
+     * Получает на вход индекс звукового файла и зацикливает его
+     */
     public void playMusic(int i) {
         music.setFile(i);
         music.play();
         music.loop();
     }
 
+    /**
+     * Метод, останавливающий музыку
+     */
     public void stopMusic() {
         music.stop();
     }
 
+    /**
+     * Метод, проигрывающий звуковой эффект(SE - sound effect)
+     * Получает индекс звукового файла и проигрывает его
+     */
     public void playSE(int i) {
         se.setFile(i);
         se.play();

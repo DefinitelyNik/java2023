@@ -6,6 +6,13 @@ import javax.imageio.ImageIO;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * Класс объекта "сердце"
+ * Нужен для создания объектов этого класа
+ * Устанавливает картинку объекта и масштабирует ее при помощи uTool'а
+ * У здоровья есть 3 картинки(пустое сердце, половинка сердца, полное сердце)
+ * По сути, это здоровье игрока, которое отображается на экране
+ */
 public class OBJ_Heart extends SuperObject{
 
     GamePanel gp;

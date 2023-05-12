@@ -16,6 +16,9 @@ public class NPC_OldMan extends Entity {
         setDialogue();
     }
 
+    /**
+     * Метод, получающий изобращения этой сущности
+     */
     public void getImage() {
         up1 = setup("/npc/oldman_up_1");
         up2 = setup("/npc/oldman_up_2");
@@ -27,6 +30,9 @@ public class NPC_OldMan extends Entity {
         right2 = setup("/npc/oldman_right_2");
     }
 
+    /**
+     * Метод, устанавливающий все возможные строки диалога с этой сущностью
+     */
     public void setDialogue() {
         dialogues[0] = "Hello, traveller!";
         dialogues[1] = "So you've come to this island to find the treasure, right?";
@@ -34,6 +40,11 @@ public class NPC_OldMan extends Entity {
         dialogues[3] = "Good luck, traveller!";
     }
 
+
+    /**
+     * Метод, позволяющий сущности делать что-то на карте
+     * По сути, это очень простой ИИ
+     */
     public void setAction()
     {
         actionLockCounter++;
@@ -59,6 +70,10 @@ public class NPC_OldMan extends Entity {
         }
     }
 
+    /**
+     * Метод, позволяющий сущности говорить,
+     * но в нем можно установить логику характерную только для этой сущности
+     */
     public void speak() {
         // тут будет нечто, характерное только для этого персонажа
         super.speak();

@@ -108,6 +108,7 @@ public class Player extends Entity{
                 }
             }
 
+            // Выбор анимации модельки игрока
             spriteCounter++;
             if(spriteCounter > 12) {
                 if(spriteNum == 1) {
@@ -120,12 +121,19 @@ public class Player extends Entity{
         }
     }
 
+    /**
+     * Метод, позволяющий игроку поднимать предметы(объекты)
+     */
     public void pickUpObject(int i) {
         if(i != 999) {
             //Тут будут новые объекты
         }
     }
 
+    /**
+     * Метод, позволяющий взаимодействовать с другими сущностями
+     * Например, можно поговорить с кем-либо
+     */
     public void interactNPC(int i) {
         if(i != 999) {
             if(gp.keyH.ePressed) {

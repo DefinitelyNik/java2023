@@ -6,7 +6,13 @@ import javax.imageio.ImageIO;
 import java.io.IOException;
 import java.util.Objects;
 
-public class OBJ_Boots extends SuperObject{
+/**
+ * Класс объекта "ботинок"
+ * Нужен для создания объектов этого класа
+ * Устанавливает картинку объекта и масштабирует ее при помощи uTool'а
+ * По сути, это предмет, который даёт дополнительные статы игроку при его получении
+ */
+public class OBJ_Boots extends SuperObject {
 
     GamePanel gp;
 

@@ -3,7 +3,7 @@ package org.game;
 import entity.Entity;
 
 /**
- * Этот класс проверяет коллизии
+ * Этот класс проверяет коллизии игрока и сущностей
  */
 public class CollisionChecker {
 
@@ -14,7 +14,7 @@ public class CollisionChecker {
     }
 
     /**
-     * Класс получает класс сущности и проверяет её коллизию с плитками вокруг
+     * Метод, получающий класс сущности и проверяюий её коллизию с плитками вокруг
      */
     public void checkTile(Entity entity) {
 
@@ -23,17 +23,14 @@ public class CollisionChecker {
         int entityTopWorldY = entity.worldY + entity.solidArea.y; // координата верхнего края области коллизии
         int entityBottomWorldY = entity.worldY + entity.solidArea.y + entity.solidArea.height; // координата нижнего края области коллизии
 
-        int entityLeftCol = entityLeftWorldX/ gp.tileSize;
-        int entityRightCol = entityRightWorldX/ gp.tileSize;
-        int entityTopRow = entityTopWorldY/ gp.tileSize;
-        int entityBottomRow = entityBottomWorldY/ gp.tileSize;
+        int entityLeftCol = entityLeftWorldX / gp.tileSize;
+        int entityRightCol = entityRightWorldX / gp.tileSize;
+        int entityTopRow = entityTopWorldY / gp.tileSize;
+        int entityBottomRow = entityBottomWorldY / gp.tileSize;
 
         int tileNum1, tileNum2; // две координаты стороны области коллизии
 
-
-        /**
-         * Тут проверяется коллизия в зависимости от направления движения сущности
-         */
+        // Тут проверяется коллизия в зависимости от направления движения сущности
         switch (entity.direction) {
             case "up" -> {
                 entityTopRow = (entityTopWorldY - entity.speed) / gp.tileSize;
@@ -69,6 +66,8 @@ public class CollisionChecker {
             }
         }
     }
+
+    // Проверка коллизии с объектами
     public int checkObject(Entity entity, boolean player) {
         int index = 999;
 
@@ -195,6 +194,7 @@ public class CollisionChecker {
         return index;
     }
 
+    // Проверка коллизии игрока
     public void checkPlayer(Entity entity) {
         //Получение зоны коллизии сущности
         entity.solidArea.x = entity.worldX + entity.solidArea.x;

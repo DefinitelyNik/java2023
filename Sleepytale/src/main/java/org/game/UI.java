@@ -9,13 +9,14 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * This class will handle all screen UI
+ * Класс, полностью отрисовывающий пользовательский интерфейс
+ * В интерфейс входят: худ, различные экраны, некоторые объекты, окна, шрифты и т.д
  */
 public class UI {
     GamePanel gp;
     Graphics2D g2;
-    Font maruMonica;// arial 40px font
-    BufferedImage heart_full, heart_half, heart_blank;
+    Font maruMonica;// Кастомный шрифт
+    BufferedImage heart_full, heart_half, heart_blank; // 3 изображения объекта "сердце"(здоровье игрока)
     public boolean messageOn = false;
     public String message = "";
     int messageCounter = 0; // frames
@@ -41,11 +42,17 @@ public class UI {
         heart_blank = heart.image3;
     }
 
+    /**
+     * Метод, показывающий сообщение на экране
+     */
     public void showMessage(String text) {
         message = text;
         messageOn = true;
     }
 
+    /**
+     * Метод, отрисовывающий интерфейс и экраны
+     */
     public void draw(Graphics2D g2) {
         this.g2 = g2;
 
@@ -73,6 +80,9 @@ public class UI {
         }
     }
 
+    /**
+     * Метод, отрисовывающий здоровье игрока
+     */
     public void drawPlayerLife() {
         int x = gp.tileSize/2;
         int y = gp.tileSize/2;
@@ -104,6 +114,9 @@ public class UI {
         }
     }
 
+    /**
+     * Метод, отрисовавающий начальный экран
+     */
     public void drawTitleScreen() {
 
         if(titleScreenState == 0) {
@@ -133,6 +146,7 @@ public class UI {
             // Меню
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 48F));
 
+            // Строка новой игры
             text = "NEW GAME";
             x = getXForCenteredText(text);
             y += gp.tileSize*3;
@@ -141,6 +155,7 @@ public class UI {
                 g2.drawString(">", x - gp.tileSize, y);
             }
 
+            // Строка загрузки сохранения
             text = "LOAD GAME";
             x = getXForCenteredText(text);
             y += gp.tileSize;
@@ -149,6 +164,7 @@ public class UI {
                 g2.drawString(">", x - gp.tileSize, y);
             }
 
+            // Строка выхода из игры
             text = "QUIT";
             x = getXForCenteredText(text);
             y += gp.tileSize;
@@ -163,11 +179,13 @@ public class UI {
             g2.setColor(Color.white);
             g2.setFont(g2.getFont().deriveFont(42F));
 
+            // Строка выбора класса
             String text = "Select your class!";
             int x = getXForCenteredText(text);
             int y = gp.tileSize * 3;
             g2.drawString(text, x, y);
 
+            // Строка класса "Fighter"
             text = "Fighter";
             x = getXForCenteredText(text);
             y += gp.tileSize * 3;
@@ -176,6 +194,7 @@ public class UI {
                 g2.drawString(">", x-gp.tileSize, y);
             }
 
+            // Строка класса "Thief"
             text = "Thief";
             x = getXForCenteredText(text);
             y += gp.tileSize;
@@ -184,6 +203,7 @@ public class UI {
                 g2.drawString(">", x-gp.tileSize, y);
             }
 
+            // Строка класса "Sorcerer"
             text = "Sorcerer";
             x = getXForCenteredText(text);
             y += gp.tileSize;
@@ -192,6 +212,7 @@ public class UI {
                 g2.drawString(">", x-gp.tileSize, y);
             }
 
+            // Строка возврата на первый начальный экран
             text = "Back";
             x = getXForCenteredText(text);
             y += gp.tileSize * 2;
@@ -202,6 +223,9 @@ public class UI {
         }
     }
 
+    /**
+     * Метод, отрисовывающий экран паузы
+     */
     public void drawPauseScreen() {
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 80));
         String text = "PAUSED";
@@ -211,6 +235,9 @@ public class UI {
         g2.drawString(text, x, y);
     }
 
+    /**
+     * Метод, отрисовывающий диалоги
+     */
     public void drawDialogueScreen() {
         // Окно диалога
         int x = gp.tileSize;
@@ -230,6 +257,9 @@ public class UI {
         }
     }
 
+    /**
+     * Метод, отрисовывающий "подокна"(нужны для окон диалогов)
+     */
     public void drawSubWindow(int x, int y, int width, int height) {
         Color c = new Color(0,0,0, 200);
         g2.setColor(c);
@@ -243,7 +273,7 @@ public class UI {
 
     /**
      * Метод, позволяющий вычислить координату х,
-     * чтобы правильно выровнять текст на экране(в зависимости от длинны строки)
+     * чтобы правильно выровнять текст на экране посередине(в зависимости от длинны строки)
      */
     public int getXForCenteredText(String text) {
         int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
