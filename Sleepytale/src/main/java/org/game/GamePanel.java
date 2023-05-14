@@ -44,6 +44,7 @@ public class GamePanel extends JPanel implements Runnable{
     public CollisionChecker cChecker = new CollisionChecker(this); // Проверка коллизий
     public AssetSetter aSetter = new AssetSetter(this); // Расставляет объекты по карте, созданные этим сеттером
     public UI ui = new UI(this); // Рисует окна, худ, объекты, шрифт и т.д.
+    public EventHandler eHandler = new EventHandler(this);
     Thread gameThread;
 
     // Сущности и объекты

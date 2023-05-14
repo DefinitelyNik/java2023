@@ -98,6 +98,11 @@ public class Player extends Entity{
             int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
             interactNPC(npcIndex);
 
+            // Проверка ивентов
+            gp.eHandler.checkEvent();
+
+            gp.keyH.ePressed = false;
+
             // Если коллизии нет, игрок может двигаться
             if(!collisionOn) {
                 switch (direction) {
@@ -141,7 +146,6 @@ public class Player extends Entity{
                 gp.npc[i].speak();
             }
         }
-        gp.keyH.ePressed = false;
     }
 
     /**
