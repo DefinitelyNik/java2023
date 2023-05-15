@@ -18,7 +18,7 @@ public class Entity {
     public int worldX, worldY; // Координаты игрока на карте
     public int speed; // Скорость передвижения игрока по карте
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2; // Переменнные, отвечающие за направление движения игрока
-    public String direction; // Направление движения игрока
+    public String direction = "down"; // Направление движения игрока
     public int spriteCounter = 0; // Переменная для отрисовки анимации передвижения сущностей
     public int spriteNum = 1; // Переменная для отрисовки анимации передвижения сущностей
     public Rectangle solidArea = new Rectangle(0, 0, 48, 48); // Область коллизии сущности(Квадрат, размер которого меньше, чем размер модели сущности)
@@ -27,6 +27,11 @@ public class Entity {
     public int actionLockCounter = 0; // Переменная, которая нужна для того, чтобы сущности не совершали миллион действий в секунду(что-то типа задержки между действиями)
     String[] dialogues = new String[20];
     int dialogueIndex = 0;
+
+    //Объекты
+    public BufferedImage image, image2, image3;
+    public String name;
+    public boolean collision = false;
 
     //Статус персонажа
     public int maxLife;

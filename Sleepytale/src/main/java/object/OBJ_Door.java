@@ -1,10 +1,7 @@
 package object;
 
+import entity.Entity;
 import org.game.GamePanel;
-
-import javax.imageio.ImageIO;
-import java.io.IOException;
-import java.util.Objects;
 
 /**
  * Класс объекта "дверь"
@@ -12,21 +9,22 @@ import java.util.Objects;
  * Устанавливает картинку объекта и масштабирует ее при помощи uTool'а
  * По сути, это обычная дверь, которая стоит на карте и изчезает, если к ней подходит игрок с ключом
  */
-public class OBJ_Door extends SuperObject{
-
-    GamePanel gp;
+public class OBJ_Door extends Entity
+{
 
     public OBJ_Door(GamePanel gp) {
 
-        this.gp = gp;
+        super(gp);
 
         name = "Door";
-        try {
-            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/objects/door.png")));
-            uTool.scaleImage(image, gp.tileSize, gp.tileSize);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        down1 = setup("/objects/door");
         collision = true;
+
+        solidArea.x = 0;
+        solidArea.y = 16;
+        solidArea.width = 48;
+        solidArea.height = 32;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
     }
 }

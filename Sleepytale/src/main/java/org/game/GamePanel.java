@@ -2,11 +2,13 @@ package org.game;
 
 import entity.Entity;
 import entity.Player;
-import object.SuperObject;
 import tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Игровая панель.
@@ -16,7 +18,7 @@ import java.awt.*;
  * Карта состоит из определенного числа плиток заданного размера.
  * Сущность и объект представляет собой 1 плитку заданного размера.
  */
-public class GamePanel extends JPanel implements Runnable{
+public class GamePanel extends JPanel implements Runnable {
 
     //Настройки экрана
     final int originalTileSize = 64; // 64х64 - оригинальный размер плитки
@@ -49,8 +51,9 @@ public class GamePanel extends JPanel implements Runnable{
 
     // Сущности и объекты
     public Player player = new Player(this, keyH); // Хеднлер игрока
-    public SuperObject[] obj = new SuperObject[10]; // Количество объектов в игре
+    public Entity[] obj = new Entity[10]; // Количество объектов в игре
     public Entity[] npc = new Entity[10]; // Количество сущностей в игре
+    ArrayList<Entity> entityList = new ArrayList<>();
 
     // Состояние игры(пауза и т.д.)
     public int gameState;
@@ -157,32 +160,50 @@ public class GamePanel extends JPanel implements Runnable{
             drawStart = System.nanoTime();
         }
 
-        // Title screen
+        // Загрузочный экран
         if(gameState == titleState) {
             ui.draw(g2);
         }
-        // Others
+        // Другое
         else {
-
-            // Tile
+            // Плитки
             tileM.draw(g2);
 
-            // Object
-            for (SuperObject superObject : obj) {
-                if (superObject != null) superObject.draw(g2, this);
-            }
+            // Сущности
+            entityList.add(player);
 
-            // NPC
-            for (Entity entity : npc) {
-                if (entity != null) {
-                    entity.draw(g2);
+            for (Entity item : npc) {
+                if (item != null) {
+                    entityList.add(item);
                 }
             }
 
-            // Player
-            player.draw(g2);
+            for (Entity value : obj) {
+                if (value != null) {
+                    entityList.add(value);
+                }
+            }
 
-            // UI
+            // Сортировка
+            Collections.sort(entityList, new Comparator<Entity>() {
+                @Override
+                public int compare(Entity e1, Entity e2) {
+                    int result = Integer.compare(e1.worldY, e2.worldY);
+                    return result;
+                }
+            });
+
+            // Прорисовка сущностей
+            for (Entity entity : entityList) {
+                entity.draw(g2);
+            }
+
+            // Очистка списка сущностей
+            for(int i = 0; i < entityList.size(); i++) {
+                entityList.remove(i);
+            }
+
+            // Интерфейс
             ui.draw(g2);
         }
 

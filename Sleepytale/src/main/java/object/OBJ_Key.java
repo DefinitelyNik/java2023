@@ -1,10 +1,7 @@
 package object;
 
+import entity.Entity;
 import org.game.GamePanel;
-
-import javax.imageio.ImageIO;
-import java.io.IOException;
-import java.util.Objects;
 
 /**
  * Класс объекта "ключ"
@@ -13,19 +10,12 @@ import java.util.Objects;
  * По сути, это ключ, который должен лежать где-то на карте.
  * Его может поднять игрок для открытия дверей или сундуков
  */
-public class OBJ_Key extends SuperObject{
-    GamePanel gp;
+public class OBJ_Key extends Entity {
 
     public OBJ_Key(GamePanel gp) {
-
-        this.gp = gp;
+        super(gp);
 
         name = "Key";
-        try {
-            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/objects/key.png")));
-            uTool.scaleImage(image, gp.tileSize, gp.tileSize);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        down1 = setup("/objects/key");
     }
 }

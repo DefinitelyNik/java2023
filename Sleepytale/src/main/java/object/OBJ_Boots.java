@@ -1,5 +1,6 @@
 package object;
 
+import entity.Entity;
 import org.game.GamePanel;
 
 import javax.imageio.ImageIO;
@@ -12,20 +13,13 @@ import java.util.Objects;
  * Устанавливает картинку объекта и масштабирует ее при помощи uTool'а
  * По сути, это предмет, который даёт дополнительные статы игроку при его получении
  */
-public class OBJ_Boots extends SuperObject {
-
-    GamePanel gp;
+public class OBJ_Boots extends Entity {
 
     public OBJ_Boots(GamePanel gp) {
 
-        this.gp = gp;
+        super(gp);
 
         name = "Boots";
-        try {
-            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/objects/boots.png")));
-            uTool.scaleImage(image, gp.tileSize, gp.tileSize);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        down1 = setup("/objects/boots");
     }
 }
