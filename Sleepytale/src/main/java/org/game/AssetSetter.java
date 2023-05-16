@@ -2,7 +2,6 @@ package org.game;
 
 import entity.NPC_OldMan;
 import object.OBJ_Door;
-import object.OBJ_Heart;
 
 /**
  * Класс, создающий объекты и сущности и назначающий их координаты на карте

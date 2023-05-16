@@ -3,10 +3,6 @@ package object;
 import entity.Entity;
 import org.game.GamePanel;
 
-import javax.imageio.ImageIO;
-import java.io.IOException;
-import java.util.Objects;
-
 /**
  * Класс объекта "сердце"
  * Нужен для создания объектов этого класа
