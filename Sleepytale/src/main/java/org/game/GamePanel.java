@@ -51,8 +51,9 @@ public class GamePanel extends JPanel implements Runnable {
 
     // Сущности и объекты
     public Player player = new Player(this, keyH); // Хеднлер игрока
-    public Entity[] obj = new Entity[10]; // Количество объектов в игре
-    public Entity[] npc = new Entity[10]; // Количество сущностей в игре
+    public Entity[] obj = new Entity[10]; // Количество одновременно отображаемых в игре объектов
+    public Entity[] npc = new Entity[10]; // Количество одновременно отображаемых в игре сущностей
+    public Entity[] monster = new Entity[20]; // Количество одновременно отображаемых в игре монстров
     ArrayList<Entity> entityList = new ArrayList<>();
 
     // Состояние игры(пауза и т.д.)
@@ -75,8 +76,9 @@ public class GamePanel extends JPanel implements Runnable {
      * Метод, добавляющий объекты в игру(на карту), поигрывающий музыку(если нужно) и т.д.
      */
     public void setupGame() {
-        aSetter.setObject();
-        aSetter.setNPC();
+        aSetter.setObject(); // добавляем объекты в игру
+        aSetter.setNPC(); // добавляем npc в игру
+        aSetter.setMonster(); // добавляем монстров в игру
         //playMusic(0);
         //stopMusic();
         gameState = titleState;
@@ -131,15 +133,19 @@ public class GamePanel extends JPanel implements Runnable {
      */
     public void update(){
         if(gameState == playState) {
-            // Игрок
+            // Обновляем игрока
             player.update();
 
-            // Сущности
-            for (Entity entity : npc) {
+            // Обновляем npc
+            for (Entity entity : npc)
                 if (entity != null) {
                     entity.update();
                 }
-            }
+            //Обновляем монстров
+            for (Entity entity : monster)
+                if (entity != null) {
+                    entity.update();
+                }
         }
         if(gameState == pauseState) {
 
@@ -172,15 +178,21 @@ public class GamePanel extends JPanel implements Runnable {
             // Сущности
             entityList.add(player);
 
-            for (Entity item : npc) {
-                if (item != null) {
-                    entityList.add(item);
+            for (Entity entity : npc) {
+                if (entity != null) {
+                    entityList.add(entity);
                 }
             }
 
-            for (Entity value : obj) {
-                if (value != null) {
-                    entityList.add(value);
+            for (Entity object : obj) {
+                if (object != null) {
+                    entityList.add(object);
+                }
+            }
+
+            for (Entity entity : monster) {
+                if (entity != null) {
+                    entityList.add(entity);
                 }
             }
 
