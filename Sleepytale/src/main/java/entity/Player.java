@@ -19,6 +19,7 @@ public class Player extends Entity{
 
     public final int screenX; // координата игрока по оси Х
     public final int screenY; // координата игрока по оси Y
+    int hasKey = 0;
 
     public Player(GamePanel gp, KeyHandler keyH) {
 
@@ -144,6 +145,20 @@ public class Player extends Entity{
     public void pickUpObject(int i) {
         if(i != 999) {
             //Тут будут новые объекты
+            String objectName = gp.obj[i].name;
+
+            switch (objectName) {
+                case "Key" -> {
+                    hasKey++;
+                    gp.obj[i] = null;
+                }
+                case "Door" -> {
+                    if (hasKey > 0) {
+                        gp.obj[i] = null;
+                        hasKey--;
+                    }
+                }
+            }
         }
     }
 
