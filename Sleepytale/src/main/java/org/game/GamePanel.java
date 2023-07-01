@@ -197,23 +197,19 @@ public class GamePanel extends JPanel implements Runnable {
             }
 
             // Сортировка
-            Collections.sort(entityList, new Comparator<Entity>() {
-                @Override
-                public int compare(Entity e1, Entity e2) {
-                    int result = Integer.compare(e1.worldY, e2.worldY);
-                    return result;
-                }
-            });
+            entityList.sort(Comparator.comparingInt(e -> e.worldY));
 
             // Прорисовка сущностей
             for (Entity entity : entityList) {
                 entity.draw(g2);
             }
 
-            // Очистка списка сущностей
-            for(int i = 0; i < entityList.size(); i++) {
-                entityList.remove(i);
-            }
+            entityList.clear();
+
+//            // Очистка списка сущностей
+//            for(int i = 0; i < entityList.size(); i++) {
+//                entityList.remove(i);
+//            }
 
             // Интерфейс
             ui.draw(g2);
