@@ -17,8 +17,8 @@ public class Entity {
     GamePanel gp;
     public int worldX, worldY; // Координаты игрока на карте
     public int speed; // Скорость передвижения игрока по карте
-    public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2; // Переменнные, отвечающие за направление движения игрока
-    public String direction = "down"; // Направление движения игрока
+    public BufferedImage straight, up1, up2, down1, down2, left1, left2, right1, right2; // Переменнные, отвечающие за направление движения игрока
+    public String direction = "straight"; // Направление движения игрока
     public int spriteCounter = 0; // Переменная для отрисовки анимации передвижения сущностей
     public int spriteNum = 1; // Переменная для отрисовки анимации передвижения сущностей
     public Rectangle solidArea = new Rectangle(0, 0, 48, 48); // Область коллизии сущности(Квадрат, размер которого меньше, чем размер модели сущности)
@@ -67,6 +67,7 @@ public class Entity {
             case "down" -> direction = "up";
             case "left" -> direction = "right";
             case "right" -> direction = "left";
+            default -> direction = "straight";
         }
     }
 

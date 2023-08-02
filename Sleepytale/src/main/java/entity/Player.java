@@ -46,7 +46,7 @@ public class Player extends Entity{
         worldX = gp.tileSize * 23;
         worldY = gp.tileSize * 21;
         speed = 4;
-        direction = "down";
+        direction = "straight";
 
         // Статус игрока
         maxLife = 6; // 1 жизнь = 1 половина сердечка на экране
@@ -57,6 +57,7 @@ public class Player extends Entity{
      * Метод, получающий картинки для анимации передвижения игрока
      */
     public void getPlayerImage() {
+        straight = setup("/player/player_straight");
         up1 = setup("/player/player_up_1");
         up2 = setup("/player/player_up_2");
         down1 = setup("/player/player_down_1");
@@ -191,6 +192,9 @@ public class Player extends Entity{
         BufferedImage image = null;
 
         switch (direction) {
+            case "straight" -> {
+                image = straight;
+            }
             case "up" -> {
                 if (spriteNum == 1) {
                     image = up1;
